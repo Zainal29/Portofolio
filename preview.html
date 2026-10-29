@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Zainal Arief | Full-Stack Web Developer</title>
+    <meta name="description" content="Portofolio Muhammad Zainal Arief - Siswa SMKN 1 Bangsri jurusan PPLG & Full-Stack Web Developer.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            light: '#4ade80'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #000000;
+            --accent: #22c55e;
+            --accent-light: #4ade80;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(34, 197, 94, 0.4);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            cursor: default;
+        }
+        #webgl-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 37, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+        }
+        .glass-card {
+            background: rgba(15, 23, 37, 0.7);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px -8px rgba(34, 197, 94, 0.16);
+        }
+        .btn-green {
+            background: var(--accent);
+            color: #061208;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 10px 22px;
+            transition: all 0.2s ease;
+        }
+        .btn-green:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.4);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #090d14; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #16a34a; }
+    </style>
+</head>
+<body class="selection:bg-green-500 selection:text-black">
+
+    <canvas id="webgl-canvas"></canvas>
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-green-500/10 via-emerald-500/5 to-transparent blur-3xl pointer-events-none z-0"></div>
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 left-0 w-full z-50 px-4 sm:px-8 py-4">
+        <nav class="max-w-6xl mx-auto glass-panel rounded-2xl px-5 py-3 flex items-center justify-between shadow-2xl">
+            <a href="#hero" class="flex items-center gap-2.5">
+                <span class="w-9 h-9 rounded-xl bg-green-500 flex items-center justify-center font-bold text-slate-950 shadow-lg shadow-green-500/20">
+                    Z
+                </span>
+                <span class="font-bold tracking-tight text-white text-lg">
+                    zain<span class="text-green-400">.dev</span>
+                </span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-green-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-green-400 transition-colors">Stack</a>
+                <a href="#projects" class="hover:text-green-400 transition-colors">Projects</a>
+                <a href="#journey" class="hover:text-green-400 transition-colors">Journey</a>
+                <a href="#contact" class="hover:text-green-400 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 border border-green-500/25 text-xs font-mono text-green-400">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span>Ready for Mitra PKL</span>
+                </div>
+                <a href="#contact" class="btn-green text-xs sm:text-sm">
+                    Let's Talk
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-8 pt-28 pb-16">
+        <!-- HERO -->
+        <section id="hero" class="min-h-[85vh] grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-green-500/10 border border-green-500/25 text-xs font-mono text-green-400 mb-6">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span>SMKN 1 Bangsri · Siap PKL & Industri</span>
+                </div>
+
+                <div class="text-slate-400 text-sm mb-2">Halo, saya</div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-5">
+                    Muhammad<br />
+                    Zainal <span class="text-green-400">Arief.</span>
+                </h1>
+
+                <div class="flex items-center gap-2 text-slate-300 font-mono text-sm sm:text-base mb-5">
+                    <span class="text-green-400">&gt;_</span>
+                    <span>Full-Stack Web Developer</span>
+                </div>
+
+                <p class="text-slate-400 text-base leading-relaxed max-w-xl mb-8">
+                    Siswa jurusan PPLG di <strong>SMK Negeri 1 Bangsri</strong>. Berfokus pada perancangan arsitektur backend Laravel yang terorganisir serta antarmuka web modern yang responsif dan interaktif.
+                </p>
+
+                <div class="flex flex-wrap gap-4 mb-10">
+                    <a href="#projects" class="btn-green text-sm flex items-center gap-2">
+                        Lihat Project &rarr;
+                    </a>
+                    <a href="/CV_MUHAMMAD_ZAINAL_ARIEF.pdf" download class="px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-white text-sm font-semibold transition-all">
+                        Unduh CV Profesional
+                    </a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-white text-sm font-semibold transition-all">
+                        Kontak
+                    </a>
+                </div>
+
+                <!-- High-contrast clear tech stack badges -->
+                <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-200">
+                    <span class="px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center gap-1.5 font-semibold">
+                        <span class="text-red-500 font-bold">L</span> Laravel
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center gap-1.5 font-semibold">
+                        <span class="text-cyan-400 font-bold">⚛</span> React
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center gap-1.5 font-semibold">
+                        <span class="text-sky-400 font-bold">~</span> Tailwind CSS
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center gap-1.5 font-semibold">
+                        <span class="text-purple-400 font-bold">&lt;?</span> PHP
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center gap-1.5 font-semibold">
+                        <span class="text-blue-400 font-bold">◈</span> MySQL
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center gap-1.5 font-semibold">
+                        <span class="text-amber-400 font-bold">❖</span> Figma
+                    </span>
+                </div>
+            </div>
+
+            <!-- Profile & Info: Dedicated Half-Body Portrait Showcase -->
+            <div class="lg:col-span-5 flex flex-col gap-6">
+                <div class="glass-card overflow-hidden border border-green-500/40 shadow-2xl max-w-sm mx-auto w-full relative">
+                    <div class="w-full h-[470px] overflow-hidden relative bg-slate-950">
+                        <img src="./src/assets/profilMZA_halfbody.jpg" alt="Muhammad Zainal Arief (Smart Casual)" class="w-full h-full object-cover" style="object-position: center 8%;">
+                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-slate-950/85 backdrop-blur-md border border-green-500/40 text-green-400 text-[11px] font-mono font-semibold flex items-center gap-1.5 z-10">
+                            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                            <span>SMKN 1 Bangsri</span>
+                        </div>
+                        <div class="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/85 backdrop-blur-md border border-slate-700 text-slate-200 text-[11px] font-mono font-semibold z-10">
+                            <span>✦ Full-Stack Dev</span>
+                        </div>
+                        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent pointer-events-none z-10"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between z-20">
+                            <div>
+                                <h3 class="text-base font-bold text-white">Muhammad Zainal Arief</h3>
+                                <p class="text-xs text-slate-400 font-mono">Laravel & React · Ready for PKL</p>
+                            </div>
+                            <span class="text-[11px] font-mono text-green-400 border border-green-500/30 px-2.5 py-1 rounded-full bg-green-500/10">
+                                2024 — Sekarang
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="py-20">
+            <div class="mb-12 border-b border-slate-800 pb-4">
+                <span class="font-mono text-xs text-green-400 tracking-widest uppercase">// 02 PROJECTS</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Proyek Pilihan</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Project 1 -->
+                <div class="glass-card overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <img src="./src/assets/projects/didispen.png" alt="DIDISPEN" class="w-full h-52 object-cover border-b border-slate-800">
+                        <div class="p-6">
+                            <span class="text-[11px] font-mono text-green-400">WEB APPLICATION · SMKN 1 BANGSRI</span>
+                            <h3 class="text-xl font-bold text-white mt-1 mb-2">DIDISPEN</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">Sistem digital pengajuan dan manajemen dispensasi siswa secara terpadu di SMK Negeri 1 Bangsri.</p>
+                            <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-300">
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Laravel</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">PHP</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">MySQL</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-slate-800 flex items-center justify-between text-xs font-semibold">
+                        <a href="https://didispen.smkn1bangsri.sch.id" target="_blank" class="text-green-400 hover:text-green-300">Live Demo &rarr;</a>
+                        <a href="https://github.com/Zainal29/Didispen" target="_blank" class="text-slate-400 hover:text-white">GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-card overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <img src="./src/assets/projects/bewood.png" alt="BeWood" class="w-full h-52 object-cover border-b border-slate-800">
+                        <div class="p-6">
+                            <span class="text-[11px] font-mono text-green-400">E-COMMERCE · MEBEL JEPARA</span>
+                            <h3 class="text-xl font-bold text-white mt-1 mb-2">BeWood</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-4">Platform katalog digital dan pemasaran mebel khas Jepara untuk membantu UMKM lokal menjangkau pembeli.</p>
+                            <div class="flex flex-wrap gap-1.5 text-[11px] font-mono text-slate-300">
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Laravel</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">JavaScript</span>
+                                <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Tailwind</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 border-t border-slate-800 flex items-center justify-between text-xs font-semibold">
+                        <a href="https://github.com/Zainal29/BeWood_3" target="_blank" class="text-green-400 hover:text-green-300">GitHub Repository &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOURNEY (KELAS 10, 11, 12) -->
+        <section id="journey" class="py-20">
+            <div class="mb-12 border-b border-slate-800 pb-4">
+                <span class="font-mono text-xs text-green-400 tracking-widest uppercase">// 03 JOURNEY</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">Perjalanan Belajar</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass-card p-6 flex flex-col sm:flex-row gap-5 items-start">
+                    <div class="font-mono text-3xl font-bold text-green-500/40">01</div>
+                    <div>
+                        <span class="text-xs font-mono text-green-400 uppercase tracking-widest font-semibold block mb-1">KELAS 10 — DASAR PEMROGRAMAN</span>
+                        <h3 class="text-lg font-bold text-white mb-2">Mempelajari Fondasi Pemrograman Web</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-3">Di kelas 10 saya belajar dasar-dasar pemrograman web, algoritma, serta struktur antarmuka menggunakan HTML5, CSS3, dan logika JavaScript interaktif.</p>
+                        <div class="flex flex-wrap gap-1.5 text-xs font-mono text-green-300">
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">HTML5</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">CSS3</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col sm:flex-row gap-5 items-start">
+                    <div class="font-mono text-3xl font-bold text-green-500/40">02</div>
+                    <div>
+                        <span class="text-xs font-mono text-green-400 uppercase tracking-widest font-semibold block mb-1">KELAS 11 — BACKEND & PROYEK NYATA</span>
+                        <h3 class="text-lg font-bold text-white mb-2">Mendalami Backend, Database & Membangun Proyek Nyata</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-3">Saat kelas 11 saya mendalami backend development dan database relasional (PHP, Laravel, MySQL, REST API) serta mulai membangun proyek nyata seperti DIDISPEN (sistem dispensasi sekolah) dan BeWood (e-commerce mebel).</p>
+                        <div class="flex flex-wrap gap-1.5 text-xs font-mono text-green-300">
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">Laravel</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">PHP</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">MySQL</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">DIDISPEN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 flex flex-col sm:flex-row gap-5 items-start">
+                    <div class="font-mono text-3xl font-bold text-green-500/40">03</div>
+                    <div>
+                        <span class="text-xs font-mono text-green-400 uppercase tracking-widest font-semibold block mb-1">KELAS 12 — PENGEMBANGAN LANJUTAN</span>
+                        <h3 class="text-lg font-bold text-white mb-2">Membangun Web Nyata & Eksplorasi Pengembangan Lanjutan</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-3">Membangun aplikasi web nyata dan mendalami lebih lanjut tentang pengembangan web modern (React, Tailwind CSS, ekosistem grafis 3D Three.js, dan optimasi arsitektur sistem) sebagai kesiapan menghadapi PKL dan industri.</p>
+                        <div class="flex flex-wrap gap-1.5 text-xs font-mono text-green-300">
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">React</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">Tailwind</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">Three.js</span>
+                            <span class="px-2 py-0.5 bg-green-500/10 border border-green-500/25 rounded">Siap PKL / Mitra</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="py-20">
+            <div class="glass-card p-10 text-center">
+                <span class="text-xs font-mono text-green-400 uppercase tracking-widest">// Let's Talk</span>
+                <h2 class="text-3xl font-extrabold text-white mt-2 mb-4">Mari Buat Sesuatu yang Bermanfaat.</h2>
+                <p class="text-slate-400 text-sm max-w-lg mx-auto mb-8">Terbuka untuk diskusi proyek website, peluang magang/PKL, maupun kolaborasi pembuatan sistem aplikasi.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button id="copy-email-btn" class="btn-green text-sm">
+                        Salin theevil1896@gmail.com
+                    </button>
+                    <a href="mailto:theevil1896@gmail.com" class="px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-white text-sm font-semibold transition-all">
+                        Kirim Email Langsung &rarr;
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-20 pt-8 border-t border-slate-800 text-center text-xs text-slate-500 font-mono">
+            &copy; 2026 Muhammad Zainal Arief. All rights reserved.
+        </footer>
+    </main>
+
+    <!-- 3D Three.js Script -->
+    <script>
+        window.onload = function() {
+            const canvas = document.getElementById('webgl-canvas');
+            if (!canvas || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x000000, 0.04);
+
+            const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 16;
+
+            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const mainGroup = new THREE.Group();
+            scene.add(mainGroup);
+
+            // Cyber Sphere
+            const sphereGeometry = new THREE.IcosahedronGeometry(4.2, 2);
+            const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x22c55e, wireframe: true, transparent: true, opacity: 0.16 });
+            const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
+            mainGroup.add(sphereMesh);
+
+            // Octahedron Core
+            const coreGeometry = new THREE.OctahedronGeometry(2.1, 1);
+            const coreMaterial = new THREE.MeshBasicMaterial({ color: 0x4ade80, wireframe: true, transparent: true, opacity: 0.32 });
+            const coreMesh = new THREE.Mesh(coreGeometry, coreMaterial);
+            mainGroup.add(coreMesh);
+
+            // Orbiting Rings
+            const ring1Geometry = new THREE.TorusGeometry(5.6, 0.035, 16, 120);
+            const ring1Material = new THREE.MeshBasicMaterial({ color: 0x10b981, transparent: true, opacity: 0.35 });
+            const ring1Mesh = new THREE.Mesh(ring1Geometry, ring1Material);
+            ring1Mesh.rotation.x = Math.PI / 3;
+            mainGroup.add(ring1Mesh);
+
+            const ring2Geometry = new THREE.TorusGeometry(5.2, 0.03, 16, 120);
+            const ring2Material = new THREE.MeshBasicMaterial({ color: 0x22c55e, transparent: true, opacity: 0.28 });
+            const ring2Mesh = new THREE.Mesh(ring2Geometry, ring2Material);
+            ring2Mesh.rotation.x = -Math.PI / 3.5;
+            mainGroup.add(ring2Mesh);
+
+            // Stardust Particles
+            const particleCount = 350;
+            const particleGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 50;
+                positions[i + 1] = (Math.random() - 0.5) * 50;
+                positions[i + 2] = (Math.random() - 0.5) * 40;
+            }
+            particleGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const particleMaterial = new THREE.PointsMaterial({ size: 0.5, color: 0x22c55e, transparent: true, opacity: 0.5 });
+            const particleField = new THREE.Points(particleGeometry, particleMaterial);
+            scene.add(particleField);
+
+            let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+                mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+            }, { passive: true });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            const clock = new THREE.Clock();
+            function animate() {
+                requestAnimationFrame(animate);
+                const elapsed = clock.getElapsedTime();
+                sphereMesh.rotation.y = elapsed * 0.09;
+                coreMesh.rotation.y = -elapsed * 0.16;
+                ring1Mesh.rotation.z = elapsed * 0.14;
+                ring2Mesh.rotation.z = -elapsed * 0.18;
+                particleField.rotation.y = elapsed * 0.02;
+
+                targetX += (mouseX - targetX) * 0.05;
+                targetY += (mouseY - targetY) * 0.05;
+                mainGroup.rotation.y = targetX * 1.2;
+                mainGroup.rotation.x = targetY * 1.2;
+
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            const copyBtn = document.getElementById('copy-email-btn');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', () => {
+                    navigator.clipboard.writeText('theevil1896@gmail.com');
+                    alert('Email theevil1896@gmail.com berhasil disalin!');
+                });
+            }
+        };
+    </script>
+</body>
+</html>
