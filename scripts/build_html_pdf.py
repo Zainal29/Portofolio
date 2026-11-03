@@ -32,7 +32,7 @@ def prepare_assets():
 
     # 2. QR Code
     qr = qrcode.QRCode(version=1, box_size=8, border=2)
-    qr.add_data("https://portofolio-pi-six-82.vercel.app/")
+    qr.add_data("https://maccer.vercel.app")
     qr.make(fit=True)
     qr_img = qr.make_image(fill_color="#22c55e", back_color="#090d16")
     qr_img.save("/tmp/mza_pdf_assets/portfolio_qr.png")
@@ -373,7 +373,7 @@ def generate_html():
         <!-- Footer Bar -->
         <footer class="pt-2 border-t border-slate-800 flex items-center justify-between text-[9px] text-slate-400 font-mono">
             <span>Muhammad Zainal Arief · SMKN 1 Bangsri</span>
-            <span class="text-emerald-400">Halaman 1 dari 4 · https://portofolio-pi-six-82.vercel.app/</span>
+            <span class="text-emerald-400">Halaman 1 dari 4 · https://maccer.vercel.app</span>
         </footer>
     </div>
 
@@ -535,7 +535,7 @@ def generate_html():
 
         <footer class="pt-2 border-t border-slate-800 flex items-center justify-between text-[9px] text-slate-400 font-mono">
             <span>Muhammad Zainal Arief · Selected Projects</span>
-            <span class="text-emerald-400">Halaman 2 dari 4 · https://portofolio-pi-six-82.vercel.app/</span>
+            <span class="text-emerald-400">Halaman 2 dari 4 · https://maccer.vercel.app</span>
         </footer>
     </div>
 
@@ -672,7 +672,7 @@ def generate_html():
 
         <footer class="pt-2 border-t border-slate-800 flex items-center justify-between text-[9px] text-slate-400 font-mono">
             <span>Muhammad Zainal Arief · My Journey</span>
-            <span class="text-emerald-400">Halaman 3 dari 4 · https://portofolio-pi-six-82.vercel.app/</span>
+            <span class="text-emerald-400">Halaman 3 dari 4 · https://maccer.vercel.app</span>
         </footer>
     </div>
 
@@ -774,7 +774,7 @@ def generate_html():
                         Pindai QR code di samping atau klik tautan di bawah untuk melihat live demo, animasi interaktif terminal, dan kode sumber proyek.
                     </p>
                     <div class="text-xs font-mono font-bold text-emerald-400">
-                        Link Website: <span class="underline">https://portofolio-pi-six-82.vercel.app/</span>
+                        Link Website: <span class="underline">https://maccer.vercel.app</span>
                     </div>
                 </div>
 

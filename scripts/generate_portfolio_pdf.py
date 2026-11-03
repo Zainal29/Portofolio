@@ -40,7 +40,7 @@ def prepare_assets():
         cropped.save(zad_dest)
 
     qr = qrcode.QRCode(version=1, box_size=8, border=2)
-    qr.add_data("https://portofolio-pi-six-82.vercel.app/")
+    qr.add_data("https://maccer.vercel.app")
     qr.make(fit=True)
     qr_img = qr.make_image(fill_color="#38bdf8", back_color="#090e1f")
     qr_img.save("/tmp/mza_pdf_assets/portfolio_qr.png")
@@ -138,7 +138,7 @@ def draw_footer(c, current_page, total_pages=4):
     c.drawString(30, 24, "Muhammad Zainal Arief • Laravel Backend Specialist • Jepara, Jawa Tengah")
     
     c.setFillColor(COLOR_CYAN)
-    c.drawRightString(PAGE_W - 30, 24, f"Halaman {current_page} dari {total_pages} • https://portofolio-pi-six-82.vercel.app/")
+    c.drawRightString(PAGE_W - 30, 24, f"Halaman {current_page} dari {total_pages} • https://maccer.vercel.app")
     c.restoreState()
 
 def draw_page_1(c):
@@ -791,7 +791,7 @@ def draw_page_4(c):
         
     c.setFont("Helvetica-Bold", 8.5)
     c.setFillColor(COLOR_CYAN)
-    c.drawCentredString(qr_x + col_w / 2, btm_y + btm_h - 166, "https://portofolio-pi-six-82.vercel.app/")
+    c.drawCentredString(qr_x + col_w / 2, btm_y + btm_h - 166, "https://maccer.vercel.app")
     
     c.setFont("Helvetica", 7.5)
     c.setFillColor(COLOR_MUTED_LIGHT)
