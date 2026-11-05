@@ -14,6 +14,7 @@ import TerminalWindow from './components/TerminalWindow';
 import DraggableIdCard from './components/DraggableIdCard';
 import MzaLogo from './components/MzaLogo';
 import CyberEdgeAura from './components/CyberEdgeAura';
+import ScrollCraftIntro from './components/ScrollCraftIntro';
 import {
   HtmlIcon, CssIcon, JsIcon, ReactIcon, TailwindIcon,
   PhpIcon, LaravelIcon, MysqlIcon, RestApiIcon,
@@ -230,7 +231,7 @@ function AmbientParticles() {
       powerPreference: 'high-performance'
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.2 : 1.8));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.25));
 
     // Stardust Particles
     const count = isMobile ? 120 : 260;
@@ -320,50 +321,6 @@ function AmbientParticles() {
   return <canvas ref={canvasRef} className="particles-canvas" aria-hidden="true" />;
 }
 
-// --- WELCOME SCREEN INITIAL COUNTER (ALFARI.MY.ID STYLE) ---
-function WelcomeScreen({ onFinished }) {
-  const [percent, setPercent] = useState(0);
-  const [isLeaving, setIsLeaving] = useState(false);
-
-  useEffect(() => {
-    let current = 0;
-    const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 8) + 4;
-      if (current >= 100) {
-        current = 100;
-        setPercent(100);
-        clearInterval(interval);
-        setTimeout(() => {
-          setIsLeaving(true);
-          setTimeout(() => {
-            if (onFinished) onFinished();
-          }, 700);
-        }, 350);
-      } else {
-        setPercent(current);
-      }
-    }, 45);
-
-    return () => clearInterval(interval);
-  }, [onFinished]);
-
-  return (
-    <div className={`welcome-screen-root ${isLeaving ? 'is-leaving' : ''}`} aria-hidden="true">
-      <div className="welcome-loader">
-        <div className="welcome-loader-number">
-          {percent}
-          <span>%</span>
-        </div>
-        <div className="welcome-progress-track">
-          <span style={{ transform: `scaleX(${percent / 100})` }} />
-        </div>
-        <div className="welcome-loader-count">
-          Memuat portofolio Muhammad Zainal Arief...
-        </div>
-      </div>
-    </div>
-  );
-}
 
 // --- TYPEWRITER HOOK ---
 function useTypewriter(words, speed = 80, delay = 2200) {
@@ -392,9 +349,9 @@ function useTypewriter(words, speed = 80, delay = 2200) {
 
 // --- MAIN PORTFOLIO COMPONENT ---
 export default function App() {
-  const [, setLoadingComplete] = useState(false);
   const [activeTab, setActiveTab] = useState('projects'); // 'projects' | 'skills' | 'certificates'
   const [selectedProject, setSelectedProject] = useState(null);
+  const [showNavbar, setShowNavbar] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('about');
@@ -474,8 +431,12 @@ export default function App() {
     rafId = requestAnimationFrame(raf);
 
     const handleScroll = () => {
-      setNavScrolled(window.scrollY > 40);
+      const scrollPos = window.scrollY;
+      const introThreshold = window.innerHeight * 0.45;
+      setShowNavbar(scrollPos > introThreshold);
+      setNavScrolled(scrollPos > introThreshold + 60);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
@@ -484,6 +445,24 @@ export default function App() {
       lenis.destroy();
       delete window.__lenis;
     };
+  }, []);
+
+  // Auto-scroll to hash target if URL contains a deep link (e.g. #hero, #portfolio)
+  useEffect(() => {
+    if (window.location.hash) {
+      const hash = window.location.hash;
+      const timer = setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          if (window.__lenis) {
+            window.__lenis.scrollTo(el, { offset: hash === '#hero' ? 0 : -70, immediate: true });
+          } else {
+            el.scrollIntoView();
+          }
+        }
+      }, 500);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   // Lock body scroll and pause Lenis when project modal is open
@@ -525,7 +504,7 @@ export default function App() {
     const el = document.querySelector(hash);
     if (el) {
       if (window.__lenis) {
-        window.__lenis.scrollTo(el, { offset: -70, duration: 1.1 });
+        window.__lenis.scrollTo(el, { offset: hash === '#hero' ? 0 : -70, duration: 1.1 });
       } else {
         el.scrollIntoView({ behavior: 'smooth' });
       }
@@ -557,10 +536,15 @@ export default function App() {
 
   return (
     <div className="home-page-container">
-      {/* 1. Fullscreen Initial Counter Loading Screen */}
-      <WelcomeScreen onFinished={() => setLoadingComplete(true)} />
+      {/* 1. Interactive ScrollCraft Scroll-to-Open Curtain Gateway */}
+      <ScrollCraftIntro onScrollDown={() => scrollTo('#hero')} />
 
-      {/* 2. Ambient Glowing Orbs & Meteor Backdrop */}
+      {/* 2. Rich Cyber Tech Background Textures & Ambient Nebula (Anti-Empty) */}
+      <div className="cyber-bg-nebula-beams" aria-hidden="true" />
+      <div className="cyber-bg-texture-grid" aria-hidden="true" />
+      <div className="cyber-bg-texture-noise" aria-hidden="true" />
+
+      {/* 2b. Ambient Glowing Orbs & Meteor Backdrop */}
       <div className="gsap-ambient" aria-hidden="true">
         <span className="gsap-ambient-orb gsap-ambient-orb-one" />
         <span className="gsap-ambient-orb gsap-ambient-orb-two" />
@@ -587,8 +571,8 @@ export default function App() {
         pulseTrigger={auraPulseTime}
       />
 
-      {/* 5. Floating Glass Surface Navbar */}
-      <header className={`navbar-root ${navScrolled ? 'navbar-scrolled' : ''}`}>
+      {/* 5. Floating Glass Surface Navbar (Revealed after scrolling past intro) */}
+      <header className={`navbar-root ${navScrolled ? 'navbar-scrolled' : ''} ${showNavbar ? 'navbar-visible' : 'navbar-hidden-on-intro'}`}>
         <div className="navbar-container glass-surface glass-surface--fallback">
           <div className="glass-surface__sheen" />
           <div className="glass-surface__rim" />
@@ -1294,7 +1278,7 @@ export default function App() {
 
               {/* Left Column: Direct Contact Cards */}
               <div className="space-y-4">
-                <div className="p-6 rounded-2xl bg-gradient-to-br from-[#121b2c] to-[#0c1320] border border-white/10 space-y-4">
+                <div className="p-6 rounded-2xl bg-[#0c121e] border border-white/10 space-y-4">
                   <h3 className="text-xl font-bold text-white tracking-tight">Informasi Kontak</h3>
                   <p className="text-sm text-zinc-400 leading-relaxed font-light">
                     Silakan hubungi saya melalui kanal langsung di bawah ini. Saya akan merespons secepat mungkin.
@@ -1342,7 +1326,7 @@ export default function App() {
                 </div>
 
                 {/* Available for PKL Callout Card */}
-                <div className="p-5 rounded-2xl bg-gradient-to-r from-blue-600/20 via-sky-500/10 to-indigo-600/20 border border-blue-500/30 flex items-center gap-4">
+                <div className="p-5 rounded-2xl bg-blue-950/20 border border-blue-500/25 flex items-center gap-4">
                   <span className="w-3.5 h-3.5 rounded-full bg-cyan-400 animate-ping flex-none" />
                   <div>
                     <h4 className="text-sm font-bold text-white">Status: Siap PKL / Magang</h4>
@@ -1354,7 +1338,7 @@ export default function App() {
               </div>
 
               {/* Right Column: Message Form */}
-              <div className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-[#121b2c] to-[#0c1320] border border-white/10">
+              <div className="p-6 md:p-8 rounded-2xl bg-[#0c121e] border border-white/10">
                 <h3 className="text-xl font-bold text-white mb-2">Kirim Pesan Langsung</h3>
                 <p className="text-xs text-zinc-400 mb-6 font-light">
                   Formulir ini terhubung langsung untuk diskusi tawaran kerjasama atau konsultasi proyek.

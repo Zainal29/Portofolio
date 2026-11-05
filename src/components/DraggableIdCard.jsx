@@ -157,7 +157,7 @@ export default function DraggableIdCard() {
           </p>
 
           <div className="pt-1 flex items-center justify-center gap-2 text-[10px] font-mono text-zinc-300 flex-wrap">
-            <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">NIS: 2024.PPLG.0929</span>
+            <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">Jepara, Jawa Tengah </span>
             <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10">SMKN 1 Bangsri</span>
           </div>
 

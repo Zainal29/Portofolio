@@ -1,0 +1,9 @@
+# GitHub Linguist Language Statistics Overrides
+# Exclude HTML files from language stats so repo displays as JavaScript / React / CSS
+*.html linguist-detectable=false
+
+# Mark static assets, runtime bundles, and helper scripts as vendored
+public/** linguist-vendored
+scripts/** linguist-vendored
+*.pdf linguist-vendored
+

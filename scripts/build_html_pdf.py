@@ -796,7 +796,7 @@ def generate_html():
 </body>
 </html>"""
 
-    output_html = "/home/zainal/Documents/portofolio/portfolio_document.html"
+    output_html = "/tmp/portfolio_document.html"
     with open(output_html, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"Generated HTML template: {output_html}")

@@ -41,21 +41,21 @@
 
 .portfolio-project-card {
   min-height: auto !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
-  background: linear-gradient(145deg, rgba(18, 27, 44, 0.9), rgba(10, 16, 28, 0.95)) !important;
-  border-radius: 20px !important;
-  transition: all 0.3s ease !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: #0c121e !important;
+  border-radius: 16px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .portfolio-project-card:hover {
-  border-color: rgba(56, 189, 248, 0.45) !important;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(44, 103, 237, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.35) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.12) !important;
   transform: translateY(-3px) !important;
 }
 
 .portfolio-card-thumbnail {
   aspect-ratio: 16/9.5 !important;
-  border-radius: 14px !important;
+  border-radius: 12px !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -1537,4 +1537,288 @@ html, body, #root {
     font-size: 9px !important;
   }
 }
+
+/* =========================================================================
+   RICH CYBER BACKGROUND TEXTURES & ATMOSPHERIC DEPTH (ANTI-EMPTY)
+   ========================================================================= */
+
+/* 1. Deep Atmospheric Aurora Nebula Beams (Rich ambient glow between sections) */
+.cyber-bg-nebula-beams {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(circle 750px at 15% 15%, rgba(37, 99, 235, 0.16), transparent 72%),
+    radial-gradient(circle 800px at 85% 38%, rgba(14, 165, 233, 0.13), transparent 74%),
+    radial-gradient(circle 680px at 18% 65%, rgba(16, 185, 129, 0.10), transparent 75%),
+    radial-gradient(circle 720px at 78% 85%, rgba(99, 102, 241, 0.14), transparent 72%);
+}
+
+/* 2. Global Tech Blueprint Grid & Dot Matrix Pattern */
+.cyber-bg-texture-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.65;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.038) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.038) 1px, transparent 1px),
+    radial-gradient(circle 1.5px at 0 0, rgba(56, 189, 248, 0.38) 100%, transparent 0);
+  background-size: 48px 48px, 48px 48px, 96px 96px;
+  background-position: 0 0, 0 0, 0 0;
+  mask-image: radial-gradient(ellipse 95% 85% at 50% 32%, black 45%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 32%, black 45%, transparent 95%);
+}
+
+/* 3. Micro Tactile Noise Texture (Prevents flat empty blacks) */
+.cyber-bg-texture-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* =========================================================================
+   SCROLLCRAFT-INSPIRED CINEMATIC SCROLL-SCRUBBED INTRO
+   ========================================================================= */
+.scrollcraft-intro-track {
+  height: 100vh;
+  min-height: 640px;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #050811;
+}
+
+.scrollcraft-intro-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(24px, 4vw, 44px) clamp(20px, 4vw, 40px);
+  z-index: 10;
+  user-select: none;
+}
+
+/* Navbar intro hide / show transition */
+.navbar-root {
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease !important;
+}
+
+.navbar-hidden-on-intro {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-28px) !important;
+}
+
+.navbar-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+}
+
+.scrollcraft-canvas-aperture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.scrollcraft-grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%);
+}
+
+.scrollcraft-header {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+.scrollcraft-brand-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.scrollcraft-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.scrollcraft-center-content {
+  text-align: center;
+  max-width: 960px;
+  position: relative;
+  z-index: 3;
+  padding: 24px 0;
+  will-change: transform, opacity;
+}
+
+.scrollcraft-main-title {
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #f8fafc;
+  line-height: 1.08;
+  margin: 0 0 16px;
+}
+
+.scrollcraft-sub-role {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #94a3b8;
+  font-weight: 400;
+  max-width: 580px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+.scrollcraft-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.scrollcraft-tech-tag {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  font-size: 12px;
+  font-family: monospace;
+  color: #cbd5e1;
+}
+
+.scrollcraft-bottom-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 3;
+}
+
+.scrollcraft-scroll-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #f8fafc;
+}
+
+.scrollcraft-scroll-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.scrollcraft-mouse-icon {
+  width: 22px;
+  height: 32px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  flex-shrink: 0;
+}
+
+.scrollcraft-mouse-wheel {
+  width: 3px;
+  height: 6px;
+  border-radius: 99px;
+  background: #3b82f6;
+  animation: scrollcraftWheelSlide 1.6s ease-in-out infinite;
+}
+
+@keyframes scrollcraftWheelSlide {
+  0% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+@media (max-width: 767px) {
+  .scrollcraft-intro-track {
+    height: 180vh;
+  }
+}
+
+/* =========================================================================
+   CLEAN MINIMALIST TYPOGRAPHY (ANTI-AI-SLOP GRADIENT OVERRIDES)
+   ========================================================================= */
+
+/* Replace rainbow AI text gradients with crisp, solid electric blue */
+.hero-h1-gradient {
+  color: #3b82f6 !important;
+  background: none !important;
+  -webkit-text-fill-color: #3b82f6 !important;
+  -webkit-background-clip: unset !important;
+}
+
+.about-title > span:last-child {
+  color: #94a3b8 !important;
+  background: none !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  -webkit-background-clip: unset !important;
+}
+
+.about-title-greeting {
+  color: #3b82f6 !important;
+  background: none !important;
+  -webkit-text-fill-color: #3b82f6 !important;
+  -webkit-background-clip: unset !important;
+}
+
+.grad-vi {
+  color: #3b82f6 !important;
+  background: none !important;
+  -webkit-text-fill-color: #3b82f6 !important;
+  -webkit-background-clip: unset !important;
+}
+
+.hero-typewriter-text {
+  color: #93c5fd !important;
+  font-weight: 500 !important;
+}
+
+
 

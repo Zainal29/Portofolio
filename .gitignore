@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Temporary PDF and testing artifacts
+portfolio_document.html
+test_*.pdf
+test_*.html
+preview.html
+*.tmp
