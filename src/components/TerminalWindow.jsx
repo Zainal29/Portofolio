@@ -16,11 +16,11 @@ export default function TerminalWindow() {
      Tasks: 16 (backend, orm, database, frontend, api)`;
     } else if (activeTab === 'pipeline') {
       textToCopy = `# 1. DIDISPEN Production Stack Pipeline
-Laravel -> PHP 8.2 -> CSS3 -> JavaScript -> MySQL
+Laravel -> PHP -> CSS3 -> JavaScript -> MySQL
 Role: Backend Developer (Muhammad Zainal Arief)
 
 # 2. BEWOOD Production Stack Pipeline
-Laravel -> PHP 8.2 -> Tailwind CSS -> JavaScript -> MySQL
+Laravel -> PHP -> Tailwind CSS -> JavaScript -> MySQL
 Role: Backend Developer (Muhammad Zainal Arief)`;
     } else {
       textToCopy = JSON.stringify({
@@ -113,7 +113,7 @@ Role: Backend Developer (Muhammad Zainal Arief)`;
                 <div className="terminal-specs w-full">
                   <p><span className="terminal-key">OS:</span> <span className="text-white">Linux x86_64 // Ubuntu Server & Arch</span></p>
                   <p><span className="terminal-key">Host:</span> <span className="text-white">SMK Negeri 1 Bangsri · Kelas XII PPLG</span></p>
-                  <p><span className="terminal-key">Role:</span> <span className="text-emerald-300 font-semibold">Backend Developer (Laravel Specialist)</span></p>
+                  <p><span className="terminal-key">Role:</span> <span className="text-emerald-300 font-semibold">Backend Developer (Laravel Developer)</span></p>
                   <p><span className="terminal-key">Uptime:</span> <span className="text-white">2+ Tahun Praktik Rekayasa Web</span></p>
                   <p><span className="terminal-key">Shell:</span> <span className="text-white">bash 5.2.21 / zsh 5.9</span></p>
                   <p><span className="terminal-key">IDE:</span> <span className="text-sky-300">VS Code · Git CLI · Postman</span></p>
@@ -147,7 +147,7 @@ Role: Backend Developer (Muhammad Zainal Arief)`;
                 <p className="text-zinc-500"># ========================================================</p>
                 <p className="text-sky-300 font-bold">ALUR_STACK_DIDISPEN=(</p>
                 <p className="pl-4 text-emerald-300">"1. Laravel (Framework Core & MVC Routing)"</p>
-                <p className="pl-4 text-emerald-300">"2. PHP 8.2 (Backend Logic & Eloquent ORM)"</p>
+                <p className="pl-4 text-emerald-300">"2. PHP (Backend Logic & Eloquent ORM)"</p>
                 <p className="pl-4 text-emerald-300">"3. CSS3 & Tailwind (Modern Responsive Styling)"</p>
                 <p className="pl-4 text-emerald-300">"4. JavaScript (Client Validation & Real-time DOM)"</p>
                 <p className="pl-4 text-emerald-300">"5. MySQL (Relational DB & Audit Logging)"</p>
@@ -159,7 +159,7 @@ Role: Backend Developer (Muhammad Zainal Arief)`;
                 <p className="text-zinc-500"># ========================================================</p>
                 <p className="text-sky-300 font-bold">ALUR_STACK_BEWOOD=(</p>
                 <p className="pl-4 text-emerald-300">"1. Laravel (Routing, Controller, Middleware)"</p>
-                <p className="pl-4 text-emerald-300">"2. PHP 8.2 (Catalog Business Logic)"</p>
+                <p className="pl-4 text-emerald-300">"2. PHP (Catalog Business Logic)"</p>
                 <p className="pl-4 text-emerald-300">"3. Tailwind CSS (Product Gallery & Responsive UI)"</p>
                 <p className="pl-4 text-emerald-300">"4. JavaScript (Dynamic Filter & WA Checkout)"</p>
                 <p className="pl-4 text-emerald-300">"5. MySQL (Relational Catalog & Furniture Schema)"</p>
@@ -177,7 +177,7 @@ Role: Backend Developer (Muhammad Zainal Arief)`;
             <div className="terminal-code">
               <p className="terminal-line"><span className="text-emerald-400">zainal@mza-dev</span>:<span className="text-cyan-400">~</span>$ jq . /var/log/developer_info.json</p>
               <pre className="text-xs md:text-sm text-zinc-300 font-mono leading-relaxed overflow-x-auto">
-{`{
+                {`{
   "name": "Muhammad Zainal Arief",
   "alias": "MZA.dev",
   "education": {
@@ -188,7 +188,7 @@ Role: Backend Developer (Muhammad Zainal Arief)`;
   },
   "primary_role": "Backend Developer",
   "skills": {
-    "backend": ["PHP 8.2", "Laravel Framework", "MySQL", "RESTful API"],
+    "backend": ["PHP", "Laravel Framework", "MySQL", "RESTful API"],
     "frontend": ["HTML5", "CSS3", "JavaScript ES6+", "React.js", "Tailwind CSS"],
     "tools": ["Git & GitHub", "VS Code & CLI", "MongoDB", "Figma", "Postman", "Linux/Bash", "Vite & NPM"]
   },

@@ -3,7 +3,7 @@
 
 **Theme:** dark  
 **Author:** Muhammad Zainal Arief (`MZA.dev`)  
-**Role:** Laravel Backend Specialist & Full-Stack Web Developer  
+**Role:** Laravel Backend  & Full-Stack Web Developer  
 **Institution:** SMK Negeri 1 Bangsri — PPLG (Pengembangan Perangkat Lunak & Gim)
 
 ---
@@ -82,3 +82,4 @@ Typography speaks in clean sans-serif and high-contrast monospaced metadata, wit
 3. **NO Artificial Loading Delays:** Visitors should never wait on fake percentage counters. The interface must be instantly interactive or scroll-driven (ScrollCraft gateway).
 4. **NO Inconsistent Spacing:** Stick to 4px/8px modular scales (`4px`, `8px`, `12px`, `16px`, `24px`, `32px`, `48px`, `64px`).
 5. **NO Unreadable Contrasts:** Secondary text must never dip below `#64748b` on dark backgrounds (WCAG AA compliance).
+

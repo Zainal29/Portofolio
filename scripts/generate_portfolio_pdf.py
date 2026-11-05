@@ -135,7 +135,7 @@ def draw_footer(c, current_page, total_pages=4):
     
     c.setFont("Helvetica", 8)
     c.setFillColor(COLOR_MUTED)
-    c.drawString(30, 24, "Muhammad Zainal Arief • Laravel Backend Specialist • Jepara, Jawa Tengah")
+    c.drawString(30, 24, "Muhammad Zainal Arief • Laravel Backend Developer • Jepara, Jawa Tengah")
     
     c.setFillColor(COLOR_CYAN)
     c.drawRightString(PAGE_W - 30, 24, f"Halaman {current_page} dari {total_pages} • https://maccer.vercel.app")
@@ -170,7 +170,7 @@ def draw_page_1(c):
     
     c.setFont("Helvetica-Bold", 11.5)
     c.setFillColor(COLOR_CYAN)
-    c.drawString(46, hero_y + hero_h - 68, "Laravel Backend Specialist & Full-Stack Web Developer")
+    c.drawString(46, hero_y + hero_h - 68, "Laravel Backend Developer & Full-Stack Web Developer")
     
     # Summary
     c.setFont("Helvetica", 8.2)
@@ -302,7 +302,7 @@ def draw_page_1(c):
          "Spesialisasi antarmuka modern responsif dengan komponen modular, tata letak fluid flexbox/grid, dan interaktivitas JavaScript murni & React (telah disesuaikan tanpa Three.js).",
          [("Kategori", "Frontend Modern"), ("Standar", "Mobile-First UI"), ("Status", "Aktif Digunakan")]),
         ("Backend Development",
-         ["PHP 8.2+", "Laravel Framework", "MySQL Database", "RESTful API"],
+         ["PHP", "Laravel Framework", "MySQL Database", "RESTful API"],
          "Perancangan logika bisnis backend, routing terstruktur, Eloquent ORM, migrasi database, relasi tabel (one-to-many, many-to-many), dan otentikasi aman tanpa duplikasi.",
          [("Kategori", "Backend Architecture"), ("Standar", "Clean Code"), ("Status", "Spesialisasi Utama")]),
         ("Tools & Workflow",
@@ -439,7 +439,7 @@ def draw_page_2(c):
     c.setFillColor(COLOR_CYAN)
     c.drawString(54, d_y + 92, "ALUR PIPELINE STACK DIDISPEN:")
     
-    flow_steps = ["Laravel 10", "PHP 8.2", "CSS3 Modern", "JavaScript", "MySQL Relational"]
+    flow_steps = ["Laravel 10", "PHP", "CSS3 Modern", "JavaScript", "MySQL Relational"]
     p_x = 54
     for i, step in enumerate(flow_steps):
         c.setFillColor(HexColor("#1e293b"))
@@ -814,7 +814,7 @@ def main():
     c = canvas.Canvas(output_pdf, pagesize=A4)
     c.setTitle("Portofolio Muhammad Zainal Arief - MZA.dev")
     c.setAuthor("Muhammad Zainal Arief")
-    c.setSubject("Portofolio Web Developer & Laravel Backend Specialist")
+    c.setSubject("Portofolio Web Developer & Laravel Backend Developer")
     c.setKeywords(["Portofolio", "Laravel", "Backend", "Muhammad Zainal Arief", "DIDISPEN", "BeWood", "SMKN 1 Bangsri"])
     
     draw_page_1(c)

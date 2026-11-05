@@ -220,7 +220,7 @@ def generate_html():
 
                     <div class="flex items-center gap-1.5 text-slate-300 font-mono text-xs font-semibold mb-2">
                         <span class="text-emerald-400">&gt;_</span>
-                        <span>Laravel Backend Specialist &amp; Full-Stack Web Developer</span>
+                        <span>Laravel Backend Developer &amp; Full-Stack Web Developer</span>
                     </div>
 
                     <p class="text-slate-300 text-[11px] leading-relaxed max-w-lg mb-3.5">
@@ -336,7 +336,7 @@ def generate_html():
                         <h4 class="text-xs font-bold text-white mb-1">Backend Development</h4>
                         <p class="text-[9.5px] text-slate-400 mb-2 leading-relaxed">Mengembangkan sistem web dengan struktur backend yang terorganisir dan mudah dikembangkan.</p>
                         <div class="flex flex-wrap gap-1">
-                            <span class="tech-pill">PHP 8.2+</span>
+                            <span class="tech-pill">PHP+</span>
                             <span class="tech-pill">Laravel Framework</span>
                             <span class="tech-pill">MySQL Database</span>
                             <span class="tech-pill">RESTful API</span>
@@ -432,7 +432,7 @@ def generate_html():
                     <div class="flex items-center gap-1.5 text-[8.5px] font-mono font-bold">
                         <span class="flow-badge highlight">Laravel 10</span>
                         <span class="text-emerald-400">&rarr;</span>
-                        <span class="flow-badge">PHP 8.2</span>
+                        <span class="flow-badge">PHP</span>
                         <span class="text-emerald-400">&rarr;</span>
                         <span class="flow-badge">CSS3</span>
                         <span class="text-emerald-400">&rarr;</span>
@@ -796,7 +796,7 @@ def generate_html():
 </body>
 </html>"""
 
-    output_html = "/tmp/portfolio_document.html"
+    output_html = "/home/zainal/Documents/portofolio/test_build_template.html"
     with open(output_html, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"Generated HTML template: {output_html}")
@@ -828,6 +828,9 @@ def convert_html_to_pdf(html_path):
         print(f"Successfully created {output_pdf} and {public_pdf}")
     else:
         print("Error: output PDF not found!")
+    
+    if os.path.exists(html_path):
+        os.remove(html_path)
 
 if __name__ == "__main__":
     html_file = generate_html()

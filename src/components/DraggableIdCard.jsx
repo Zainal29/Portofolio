@@ -153,7 +153,7 @@ export default function DraggableIdCard() {
             Muhammad Zainal Arief
           </h3>
           <p className="text-[11px] text-blue-300 font-medium">
-            Full-Stack Developer (Laravel Specialist)
+            Full-Stack Developer (Laravel Developer)
           </p>
 
           <div className="pt-1 flex items-center justify-center gap-2 text-[10px] font-mono text-zinc-300 flex-wrap">

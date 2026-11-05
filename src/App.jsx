@@ -61,7 +61,7 @@ const navLinks = [
 
 const typewriterWords = [
   'Full-Stack Web Developer',
-  'Laravel Backend Specialist',
+  'Laravel Backend Developer',
   'Siswa PPLG SMKN 1 Bangsri',
 ];
 
@@ -885,7 +885,7 @@ export default function App() {
               </div>
 
               <div>
-                <strong className="text-white block mb-1">02. Pengalaman Sistem Riil</strong>
+                <strong className="text-white block mb-1">02. Pengalaman Sistem Nyata</strong>
                 <p>Telah merilis dan mengelola DIDISPEN (sistem dispensasi sekolah) dan BeWood (katalog mebel Jepara) sebagai Backend Developer.</p>
               </div>
 

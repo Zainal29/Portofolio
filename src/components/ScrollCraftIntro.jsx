@@ -151,12 +151,12 @@ export default function ScrollCraftIntro({ onScrollDown }) {
           </h1>
 
           <p className="scrollcraft-sub-role">
-            Laravel Backend Specialist &amp; Full-Stack Web Developer
+            Laravel Backend Developer &amp; Full-Stack Web Developer
           </p>
 
           {/* Minimalist Tech Badges */}
           <div className="scrollcraft-tech-pills">
-            {['Laravel', 'PHP 8.2', 'MySQL', 'REST API', 'React', 'Tailwind CSS'].map((tech) => (
+            {['Laravel', 'PHP', 'MySQL', 'REST API', 'React', 'Tailwind CSS'].map((tech) => (
               <span key={tech} className="scrollcraft-tech-tag">
                 {tech}
               </span>
