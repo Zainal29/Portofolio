@@ -6,7 +6,8 @@ import {
   ArrowUpRight, Download, Mail,
   Phone, MapPin, Sparkles, Check, Send, Award,
   Code2, Database, Layout, GitBranch, ChevronUp, Menu, X,
-  Layers, Terminal, Server, Globe, ArrowRight, FileText
+  Layers, Terminal, Server, Globe, ArrowRight, FileText,
+  AlertCircle, Info, ExternalLink
 } from 'lucide-react';
 
 import TerminalWindow from './components/TerminalWindow';
@@ -258,6 +259,8 @@ export default function App() {
   const [formEmail, setFormEmail] = useState('');
   const [formMessage, setFormMessage] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formStatus, setFormStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'activation_needed' | 'error'
+  const [formStatusMsg, setFormStatusMsg] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const typewriterText = useTypewriter(typewriterWords);
@@ -409,50 +412,56 @@ export default function App() {
     }
 
     setIsSubmitting(true);
+    setFormStatus('submitting');
+    setFormStatusMsg('');
 
     try {
-      // Send directly to theevil1896@gmail.com via Web3Forms API
-      await fetch('https://api.web3forms.com/submit', {
+      // Send directly to theevil1896@gmail.com via FormSubmit.co AJAX API
+      const res = await fetch('https://formsubmit.co/ajax/theevil1896@gmail.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          access_key: 'b9472e9a-7a55-4fa7-9a99-b1d5d1c5a932',
           name: formName,
           email: formEmail,
           message: formMessage,
-          to_email: 'theevil1896@gmail.com',
-          from_name: `${formName} (MZA Portfolio)`,
-          subject: `Pesan Portofolio Baru dari ${formName}`
+          _subject: `[MZA Portfolio] Pesan Baru dari ${formName}`,
+          _template: 'table',
+          _captcha: 'false'
         })
       });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && (data.success === 'true' || data.success === true)) {
+        setFormStatus('success');
+        setFormStatusMsg('Pesan berhasil terkirim dan diteruskan langsung ke theevil1896@gmail.com.');
+        confetti({
+          particleCount: 50,
+          spread: 60,
+          origin: { y: 0.8 },
+          colors: ['#2563eb', '#38bdf8', '#10b981', '#ffffff']
+        });
+        triggerAuraPulse();
+        setFormSubmitted(true);
+      } else if (data.message && data.message.toLowerCase().includes('activation')) {
+        setFormStatus('activation_needed');
+        setFormStatusMsg('FormSubmit memerlukan aktivasi email pertama kali: Cek inbox atau folder Spam/Promosi pada theevil1896@gmail.com dan klik "Activate Form".');
+        setFormSubmitted(true);
+      } else {
+        setFormStatus('error');
+        setFormStatusMsg(data.message || 'Gagal mengirim otomatis. Silakan gunakan tombol langsung WhatsApp atau Gmail di bawah.');
+        setFormSubmitted(true);
+      }
     } catch {
-      // Fallback proceeds regardless
+      setFormStatus('error');
+      setFormStatusMsg('Koneksi terhambat. Silakan hubungi langsung via WhatsApp atau Gmail di bawah.');
+      setFormSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
     }
-
-    confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.8 },
-      colors: ['#2563eb', '#38bdf8', '#10b981', '#ffffff']
-    });
-
-    triggerAuraPulse();
-    setFormSubmitted(true);
-    setIsSubmitting(false);
-
-    // Auto-open mailto in background as direct delivery confirmation
-    const mailtoUrl = `mailto:theevil1896@gmail.com?subject=${encodeURIComponent('Pesan Portofolio dari ' + formName)}&body=${encodeURIComponent(formMessage + '\n\nDari: ' + formName + ' (' + formEmail + ')')}`;
-    window.location.href = mailtoUrl;
-
-    setTimeout(() => {
-      setFormName('');
-      setFormEmail('');
-      setFormMessage('');
-      setFormSubmitted(false);
-    }, 6000);
   };
 
   return (
@@ -1265,10 +1274,15 @@ export default function App() {
                         <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                         <span>Mengirim ke theevil1896@gmail.com...</span>
                       </>
-                    ) : formSubmitted ? (
+                    ) : formStatus === 'success' ? (
                       <>
                         <Check size={16} className="text-emerald-300" />
                         <span>Pesan Berhasil Terkirim!</span>
+                      </>
+                    ) : formStatus === 'activation_needed' ? (
+                      <>
+                        <Info size={16} className="text-amber-300" />
+                        <span>Konfirmasi Aktivasi Terkirim!</span>
                       </>
                     ) : (
                       <>
@@ -1278,31 +1292,77 @@ export default function App() {
                     )}
                   </button>
 
-                  {/* Sent Confirmation with Direct Actions */}
+                  {/* Form Status Card with Transparent Feedback & Instant Direct Actions */}
                   {formSubmitted && (
-                    <div className="p-3.5 rounded-xl bg-slate-900 border border-emerald-500/30 text-xs text-zinc-200 space-y-2 mt-2">
-                      <div className="flex items-center gap-2 text-emerald-400 font-semibold">
-                        <Check size={15} />
-                        <span>Terkirim ke theevil1896@gmail.com</span>
+                    <div className={`p-4 rounded-xl border text-xs space-y-2.5 mt-3 transition-all ${
+                      formStatus === 'success'
+                        ? 'bg-slate-900/90 border-emerald-500/40 text-emerald-200'
+                        : formStatus === 'activation_needed'
+                        ? 'bg-slate-900/90 border-amber-500/40 text-amber-200'
+                        : 'bg-slate-900/90 border-rose-500/40 text-rose-200'
+                    }`}>
+                      <div className="flex items-center gap-2 font-semibold text-sm">
+                        {formStatus === 'success' && <Check size={16} className="text-emerald-400 shrink-0" />}
+                        {formStatus === 'activation_needed' && <Info size={16} className="text-amber-400 shrink-0" />}
+                        {formStatus === 'error' && <AlertCircle size={16} className="text-rose-400 shrink-0" />}
+                        <span>
+                          {formStatus === 'success' && 'Terkirim ke theevil1896@gmail.com'}
+                          {formStatus === 'activation_needed' && 'Aktivasi Form Diperlukan (Cek Email Anda)'}
+                          {formStatus === 'error' && 'Pengiriman Otomatis Terkendala'}
+                        </span>
                       </div>
-                      <p className="text-[11px] text-zinc-400">
-                        Pesan Anda telah diteruskan. Anda juga dapat membuka Gmail secara langsung atau via WhatsApp:
+
+                      <p className="text-xs text-zinc-300 leading-relaxed font-light">
+                        {formStatus === 'success' && 'Pesan Anda telah berhasil dikirim ke theevil1896@gmail.com. Kami akan segera merespons.'}
+                        {formStatus === 'activation_needed' && (
+                          <>
+                            FormSubmit telah mengirimkan email konfirmasi ke <strong className="text-white">theevil1896@gmail.com</strong>.
+                            Silakan buka Gmail Anda (cek folder <strong className="text-white">Spam, Promosi, atau Info Terbaru</strong>) dan klik tombol <strong className="text-amber-300">"Activate Form"</strong> satu kali saja. Setelah aktif, semua pesan pengunjung akan langsung masuk ke inbox utama Anda!
+                          </>
+                        )}
+                        {formStatus === 'error' && (
+                          <>
+                            Form otomatis terkendala. Jangan khawatir, Anda dapat langsung mengirim pesan ini dengan 1-klik melalui tombol Gmail Web atau WhatsApp di bawah:
+                          </>
+                        )}
                       </p>
+
                       <div className="flex items-center gap-2 pt-1 flex-wrap">
+                        {/* Direct Gmail Web Compose */}
                         <a
-                          href={`mailto:theevil1896@gmail.com?subject=${encodeURIComponent('Pesan dari ' + formName)}&body=${encodeURIComponent(formMessage + '\n\nDari: ' + formName + ' (' + formEmail + ')')}`}
-                          className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-blue-300 text-[11px] font-mono hover:bg-blue-600 hover:text-white transition-colors"
-                        >
-                          Buka di Gmail / Mail App ➔
-                        </a>
-                        <a
-                          href={`https://wa.me/6289509507443?text=${encodeURIComponent('Halo Zainal, saya ' + formName + ' (' + formEmail + ').\n\nPesan:\n' + formMessage)}`}
+                          href={`https://mail.google.com/mail/?view=cm&fs=1&to=theevil1896@gmail.com&su=${encodeURIComponent('Pesan Portofolio dari ' + (formName || 'Pengunjung'))}&body=${encodeURIComponent((formMessage || '') + '\n\nDari: ' + (formName || '') + ' (' + (formEmail || '') + ')')}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-emerald-300 text-[11px] font-mono hover:bg-emerald-600 hover:text-white transition-colors"
+                          className="px-3 py-1.5 rounded-lg bg-blue-600/20 border border-blue-500/50 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-mono transition-colors flex items-center gap-1.5"
                         >
-                          Kirim via WhatsApp ➔
+                          <Mail size={13} />
+                          <span>Buka di Gmail Web ➔</span>
                         </a>
+
+                        {/* Direct WhatsApp Message */}
+                        <a
+                          href={`https://wa.me/6289509507443?text=${encodeURIComponent('Halo Zainal, saya ' + (formName || '') + ' (' + (formEmail || '') + ').\n\nPesan:\n' + (formMessage || ''))}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3 py-1.5 rounded-lg bg-emerald-600/20 border border-emerald-500/50 text-emerald-300 hover:bg-emerald-600 hover:text-white text-xs font-mono transition-colors flex items-center gap-1.5"
+                        >
+                          <Phone size={13} />
+                          <span>Kirim via WhatsApp ➔</span>
+                        </a>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormSubmitted(false);
+                            setFormStatus('idle');
+                            setFormName('');
+                            setFormEmail('');
+                            setFormMessage('');
+                          }}
+                          className="px-2.5 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-zinc-400 hover:text-white text-xs font-mono transition-colors"
+                        >
+                          Tulis Ulang
+                        </button>
                       </div>
                     </div>
                   )}
