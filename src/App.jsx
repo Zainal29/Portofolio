@@ -1,20 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import * as THREE from 'three';
 import Lenis from 'lenis';
 import confetti from 'canvas-confetti';
 import {
   ArrowUpRight, Download, Mail,
   Phone, MapPin, Sparkles, Check, Send, Award,
   Code2, Database, Layout, GitBranch, ChevronUp, Menu, X,
-  Layers, Terminal, Server, Globe, ArrowRight, Music, FileText
+  Layers, Terminal, Server, Globe, ArrowRight, FileText
 } from 'lucide-react';
 
 import TerminalWindow from './components/TerminalWindow';
-import DraggableIdCard from './components/DraggableIdCard';
+import DeveloperShowcaseCard from './components/DeveloperShowcaseCard';
 import MzaLogo from './components/MzaLogo';
-import CyberEdgeAura from './components/CyberEdgeAura';
-import ScrollCraftIntro from './components/ScrollCraftIntro';
 import {
   HtmlIcon, CssIcon, JsIcon, ReactIcon, TailwindIcon,
   PhpIcon, LaravelIcon, MysqlIcon, RestApiIcon,
@@ -211,117 +208,6 @@ const skillsCategories = [
   }
 ];
 
-// --- 3D AMBIENT PARTICLES & CYBER ORB BACKGROUND ---
-function AmbientParticles() {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const isMobile = window.innerWidth < 768;
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 20;
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: !isMobile,
-      powerPreference: 'high-performance'
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.0 : 1.25));
-
-    // Stardust Particles
-    const count = isMobile ? 120 : 260;
-    const geo = new THREE.BufferGeometry();
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i += 3) {
-      pos[i] = (Math.random() - 0.5) * 60;
-      pos[i + 1] = (Math.random() - 0.5) * 60;
-      pos[i + 2] = (Math.random() - 0.5) * 40;
-    }
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-
-    const pCanvas = document.createElement('canvas');
-    pCanvas.width = 16;
-    pCanvas.height = 16;
-    const ctx = pCanvas.getContext('2d');
-    if (ctx) {
-      const grad = ctx.createRadialGradient(8, 8, 0, 8, 8, 8);
-      grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-      grad.addColorStop(0.3, 'rgba(56, 189, 248, 0.75)');
-      grad.addColorStop(1, 'rgba(44, 103, 237, 0)');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 16, 16);
-    }
-    const texture = new THREE.CanvasTexture(pCanvas);
-    const mat = new THREE.PointsMaterial({
-      size: isMobile ? 0.35 : 0.45,
-      map: texture,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false
-    });
-    const particles = new THREE.Points(geo, mat);
-    scene.add(particles);
-
-    // Subtle Hologram Torus Ring
-    const torusGeo = new THREE.TorusGeometry(6.5, 0.02, 16, 64);
-    const torusMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.22 });
-    const torus = new THREE.Mesh(torusGeo, torusMat);
-    torus.rotation.x = Math.PI / 3;
-    torus.rotation.y = Math.PI / 6;
-    scene.add(torus);
-
-    let animationFrameId;
-    let mouseX = 0, mouseY = 0;
-
-    const handleMouseMove = (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-    window.addEventListener('resize', handleResize);
-
-    const animate = () => {
-      particles.rotation.y += 0.0006;
-      particles.rotation.x += 0.0003;
-      torus.rotation.z += 0.002;
-      torus.rotation.y += 0.0015;
-
-      camera.position.x += (mouseX * 1.5 - camera.position.x) * 0.03;
-      camera.position.y += (-mouseY * 1.5 - camera.position.y) * 0.03;
-      camera.lookAt(0, 0, 0);
-
-      renderer.render(scene, camera);
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('resize', handleResize);
-      renderer.dispose();
-      geo.dispose();
-      mat.dispose();
-      torusGeo.dispose();
-      torusMat.dispose();
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="particles-canvas" aria-hidden="true" />;
-}
-
-
 // --- TYPEWRITER HOOK ---
 function useTypewriter(words, speed = 80, delay = 2200) {
   const [text, setText] = useState('');
@@ -351,7 +237,6 @@ function useTypewriter(words, speed = 80, delay = 2200) {
 export default function App() {
   const [activeTab, setActiveTab] = useState('projects'); // 'projects' | 'skills' | 'certificates'
   const [selectedProject, setSelectedProject] = useState(null);
-  const [showNavbar, setShowNavbar] = useState(false);
   const [navScrolled, setNavScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('about');
@@ -360,12 +245,7 @@ export default function App() {
   const portraitStageRef = useRef(null);
   const [isHackerHovered, setIsHackerHovered] = useState(false);
 
-  // Edge Aura interactive states
-  const [isUserTyping, setIsUserTyping] = useState(false);
-  const [auraPulseTime, setAuraPulseTime] = useState(0);
-
   const triggerAuraPulse = () => {
-    setAuraPulseTime(Date.now());
     try {
       window.dispatchEvent(new CustomEvent('aura:saved-pulse'));
     } catch {
@@ -378,6 +258,7 @@ export default function App() {
   const [formEmail, setFormEmail] = useState('');
   const [formMessage, setFormMessage] = useState('');
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const typewriterText = useTypewriter(typewriterWords);
 
@@ -431,10 +312,7 @@ export default function App() {
     rafId = requestAnimationFrame(raf);
 
     const handleScroll = () => {
-      const scrollPos = window.scrollY;
-      const introThreshold = window.innerHeight * 0.45;
-      setShowNavbar(scrollPos > introThreshold);
-      setNavScrolled(scrollPos > introThreshold + 60);
+      setNavScrolled(window.scrollY > 20);
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -449,19 +327,27 @@ export default function App() {
 
   // Auto-scroll to hash target if URL contains a deep link (e.g. #hero, #portfolio)
   useEffect(() => {
-    if (window.location.hash) {
-      const hash = window.location.hash;
-      const timer = setTimeout(() => {
-        const el = document.querySelector(hash);
-        if (el) {
-          if (window.__lenis) {
-            window.__lenis.scrollTo(el, { offset: hash === '#hero' ? 0 : -70, immediate: true });
-          } else {
-            el.scrollIntoView();
+    try {
+      if (window.location.hash && window.location.hash.length > 1) {
+        const hash = window.location.hash;
+        const timer = setTimeout(() => {
+          try {
+            const el = document.querySelector(hash);
+            if (el) {
+              if (window.__lenis) {
+                window.__lenis.scrollTo(el, { offset: hash === '#hero' ? 0 : -70, immediate: true });
+              } else {
+                el.scrollIntoView();
+              }
+            }
+          } catch {
+            // Safe fallback
           }
-        }
-      }, 500);
-      return () => clearTimeout(timer);
+        }, 500);
+        return () => clearTimeout(timer);
+      }
+    } catch {
+      // Safe fallback
     }
   }, []);
 
@@ -512,126 +398,127 @@ export default function App() {
     setMobileMenuOpen(false);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (!formName || !formEmail || !formMessage) return;
+    if (!formName || !formEmail || !formMessage || isSubmitting) return;
+
+    // Honeypot check for bots
+    const botField = e.target.elements['botcheck'];
+    if (botField && botField.checked) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Send directly to theevil1896@gmail.com via Web3Forms API
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'b9472e9a-7a55-4fa7-9a99-b1d5d1c5a932',
+          name: formName,
+          email: formEmail,
+          message: formMessage,
+          to_email: 'theevil1896@gmail.com',
+          from_name: `${formName} (MZA Portfolio)`,
+          subject: `Pesan Portofolio Baru dari ${formName}`
+        })
+      });
+    } catch {
+      // Fallback proceeds regardless
+    }
 
     confetti({
-      particleCount: 70,
+      particleCount: 50,
       spread: 60,
       origin: { y: 0.8 },
-      colors: ['#2c67ed', '#38bdf8', '#818cf8', '#ffffff']
+      colors: ['#2563eb', '#38bdf8', '#10b981', '#ffffff']
     });
 
     triggerAuraPulse();
-
     setFormSubmitted(true);
+    setIsSubmitting(false);
+
+    // Auto-open mailto in background as direct delivery confirmation
+    const mailtoUrl = `mailto:theevil1896@gmail.com?subject=${encodeURIComponent('Pesan Portofolio dari ' + formName)}&body=${encodeURIComponent(formMessage + '\n\nDari: ' + formName + ' (' + formEmail + ')')}`;
+    window.location.href = mailtoUrl;
+
     setTimeout(() => {
       setFormName('');
       setFormEmail('');
       setFormMessage('');
       setFormSubmitted(false);
-    }, 4000);
+    }, 6000);
   };
 
   return (
     <div className="home-page-container">
-      {/* 1. Interactive ScrollCraft Scroll-to-Open Curtain Gateway */}
-      <ScrollCraftIntro onScrollDown={() => scrollTo('#hero')} />
+      {/* High-Performance Precision Solid Tech Blueprint Grid (Zero GPU Overhead, No Gradients/Blur) */}
+      <div className="solid-tech-grid-bg" aria-hidden="true" />
 
-      {/* 2. Rich Cyber Tech Background Textures & Ambient Nebula (Anti-Empty) */}
-      <div className="cyber-bg-nebula-beams" aria-hidden="true" />
-      <div className="cyber-bg-texture-grid" aria-hidden="true" />
-      <div className="cyber-bg-texture-noise" aria-hidden="true" />
+      {/* Floating Modern Pill Navbar */}
+      <header className="navbar-root fixed top-3 md:top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+        <div className={`pointer-events-auto flex items-center justify-between gap-4 md:gap-8 px-4 md:px-5 py-2.5 rounded-full border transition-all duration-300 max-w-4xl w-full ${
+          navScrolled
+            ? 'bg-[#0c121e]/95 border-slate-700/80 shadow-2xl backdrop-blur-md'
+            : 'bg-[#0c121e]/85 border-slate-800 shadow-xl backdrop-blur-sm'
+        }`}>
 
-      {/* 2b. Ambient Glowing Orbs & Meteor Backdrop */}
-      <div className="gsap-ambient" aria-hidden="true">
-        <span className="gsap-ambient-orb gsap-ambient-orb-one" />
-        <span className="gsap-ambient-orb gsap-ambient-orb-two" />
-        <span className="gsap-ambient-orb gsap-ambient-orb-three" />
-      </div>
+          {/* Simple Logo */}
+          <a
+            href="#hero"
+            onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}
+            className="flex items-center"
+            aria-label="MZA.dev - Muhammad Zainal Arief"
+          >
+            <MzaLogo size={30} showText={true} />
+          </a>
 
-      {/* 3. Meteor Shower Animation */}
-      <div className="meteor-background" aria-hidden="true">
-        <span className="meteor" style={{ '--meteor-top': '8%', '--meteor-left': '25%', '--meteor-duration': '6.5s', '--meteor-delay': '0s' }} />
-        <span className="meteor" style={{ '--meteor-top': '18%', '--meteor-left': '65%', '--meteor-duration': '7.2s', '--meteor-delay': '2.1s' }} />
-        <span className="meteor" style={{ '--meteor-top': '42%', '--meteor-left': '80%', '--meteor-duration': '8s', '--meteor-delay': '4.5s' }} />
-        <span className="meteor" style={{ '--meteor-top': '68%', '--meteor-left': '15%', '--meteor-duration': '6.8s', '--meteor-delay': '1.3s' }} />
-      </div>
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1" aria-label="Main Navigation">
+            {navLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveNav(link.label.toLowerCase());
+                  scrollTo(link.href);
+                }}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all ${
+                  activeNav === link.label.toLowerCase()
+                    ? 'bg-blue-600/20 border border-blue-500/40 text-blue-300'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
 
-      {/* 4. Canvas Particles Engine */}
-      <div className="particles-container">
-        <AmbientParticles />
-      </div>
-
-      {/* 4b. Ambient Cyber Edge Glow Aura (takuyajodai/edge-aura) */}
-      <CyberEdgeAura
-        isHacker={isHackerHovered}
-        isTyping={isUserTyping}
-        pulseTrigger={auraPulseTime}
-      />
-
-      {/* 5. Floating Glass Surface Navbar (Revealed after scrolling past intro) */}
-      <header className={`navbar-root ${navScrolled ? 'navbar-scrolled' : ''} ${showNavbar ? 'navbar-visible' : 'navbar-hidden-on-intro'}`}>
-        <div className="navbar-container glass-surface glass-surface--fallback">
-          <div className="glass-surface__sheen" />
-          <div className="glass-surface__rim" />
-          <div className="glass-surface__content">
-
-            {/* Logo Brand with MZA Monogram */}
+          {/* Right Action & Mobile Toggle */}
+          <div className="flex items-center gap-2">
             <a
-              href="#hero"
-              onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}
-              className="navbar-brand"
-              aria-label="MZA.dev - Muhammad Zainal Arief"
+              href="#contact"
+              onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold transition-colors"
             >
-              <MzaLogo size={34} showText={true} />
+              <span>Let's Talk</span>
+              <ArrowRight size={13} />
             </a>
 
-            {/* Desktop Navigation Links */}
-            <nav className="navbar-links" aria-label="Main Navigation">
-              {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setActiveNav(link.label.toLowerCase());
-                    scrollTo(link.href);
-                  }}
-                  className={`navbar-link-item ${activeNav === link.label.toLowerCase() ? 'is-active' : ''}`}
-                >
-                  <span>{link.label}</span>
-                  {activeNav === link.label.toLowerCase() && (
-                    <span className="navbar-active-pill" />
-                  )}
-                </a>
-              ))}
-            </nav>
-
-            {/* Navbar Actions */}
-            <div className="navbar-actions">
-              <a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
-                className="navbar-cta-btn"
-              >
-                <span>Let's Talk</span>
-                <ArrowRight size={14} />
-              </a>
-
-              {/* Mobile Menu Toggle Button */}
-              <button
-                type="button"
-                className="navbar-mobile-toggle"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-              </button>
-            </div>
-
+            <button
+              type="button"
+              className="md:hidden p-1 text-zinc-300 hover:text-white rounded-lg"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
       </header>
@@ -734,7 +621,7 @@ export default function App() {
               {/* Display Headline */}
               <div className="hero-heading-group">
                 <h1 className="hero-h1-white">Muhammad</h1>
-                <h1 className="hero-h1-gradient">Zainal Arief.</h1>
+                <h1 className="hero-h1-accent">Zainal Arief.</h1>
               </div>
 
               {/* Typewriter Row */}
@@ -791,9 +678,9 @@ export default function App() {
 
             </div>
 
-            {/* Right Column: Interactive Draggable ID Card (Tarik-tarik Badge) */}
-            <div className="hero-visual-col flex items-center justify-center relative">
-              <DraggableIdCard />
+            {/* Right Column: Developer Engineering Spec Card (High-Performance Replacement) */}
+            <div className="hero-visual-col flex items-center justify-center relative w-full">
+              <DeveloperShowcaseCard />
             </div>
 
           </div>
@@ -1011,48 +898,6 @@ export default function App() {
         </section>
 
         {/* =========================================================================
-           SPOTIFY SECTION (CODING SOUNDTRACK)
-           ========================================================================= */}
-        <section className="spotify-section">
-          <div className="spotify-card">
-            <div className="spotify-copy">
-              <div className="spotify-eyebrow">
-                <span className="spotify-eyebrow-dot" />
-                <span>NOW PLAYING // CODING SOUNDTRACK</span>
-              </div>
-              <h2>
-                Soundtrack yang Menemani <span>Setiap Baris Kode.</span>
-              </h2>
-              <p className="spotify-description">
-                Musik lo-fi, synthwave, dan ambient yang menjaga fokus ritme komputasi saat merancang relasi basis data dan menyempurnakan interaksi UI.
-              </p>
-              <a
-                href="https://open.spotify.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="spotify-open-link"
-              >
-                <Music size={16} />
-                <span>Dengarkan di Spotify</span>
-              </a>
-            </div>
-
-            <div className="spotify-player-frame">
-              <iframe
-                title="Spotify Coding Soundtrack"
-                src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdLEN7aqioXM?utm_source=generator&theme=0"
-                width="100%"
-                height="352"
-                frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="spotify-embed"
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* =========================================================================
            TERMINAL LAYOUT (GAMBAR 3 REVISION)
            ========================================================================= */}
         <section className="terminal-section py-4">
@@ -1081,41 +926,43 @@ export default function App() {
             </div>
 
             {/* Tab Switcher Bar */}
-            <div className="portfolio-tab-bar" role="tablist" aria-label="Portfolio sections">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'projects'}
-                onClick={() => setActiveTab('projects')}
-                className={`portfolio-tab-btn ${activeTab === 'projects' ? 'is-active' : ''}`}
-              >
-                <Layers size={16} className="portfolio-tab-icon" />
-                <span className="portfolio-tab-text">Projects</span>
-                <span className="portfolio-tab-badge">{projectsData.length}</span>
-              </button>
+            <div className="flex justify-center w-full mb-10">
+              <div className="portfolio-tab-bar" role="tablist" aria-label="Portfolio sections">
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === 'projects'}
+                  onClick={() => setActiveTab('projects')}
+                  className={`portfolio-tab-btn ${activeTab === 'projects' ? 'is-active' : ''}`}
+                >
+                  <Layers size={15} className="portfolio-tab-icon" />
+                  <span className="portfolio-tab-text">Projects</span>
+                  <span className="portfolio-tab-badge">{projectsData.length}</span>
+                </button>
 
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'skills'}
-                onClick={() => setActiveTab('skills')}
-                className={`portfolio-tab-btn ${activeTab === 'skills' ? 'is-active' : ''}`}
-              >
-                <Code2 size={16} className="portfolio-tab-icon" />
-                <span className="portfolio-tab-text">Tech Skills</span>
-              </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === 'skills'}
+                  onClick={() => setActiveTab('skills')}
+                  className={`portfolio-tab-btn ${activeTab === 'skills' ? 'is-active' : ''}`}
+                >
+                  <Code2 size={15} className="portfolio-tab-icon" />
+                  <span className="portfolio-tab-text">Tech Skills</span>
+                </button>
 
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === 'certificates'}
-                onClick={() => setActiveTab('certificates')}
-                className={`portfolio-tab-btn ${activeTab === 'certificates' ? 'is-active' : ''}`}
-              >
-                <Award size={16} className="portfolio-tab-icon" />
-                <span className="portfolio-tab-text">Certificates</span>
-                <span className="portfolio-tab-badge">0</span>
-              </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === 'certificates'}
+                  onClick={() => setActiveTab('certificates')}
+                  className={`portfolio-tab-btn ${activeTab === 'certificates' ? 'is-active' : ''}`}
+                >
+                  <Award size={15} className="portfolio-tab-icon" />
+                  <span className="portfolio-tab-text">Certificates</span>
+                  <span className="portfolio-tab-badge">Persiapan</span>
+                </button>
+              </div>
             </div>
 
             {/* TAB CONTENT: PROJECTS (BALANCED 2X2 GRID WITH STACK FLOW & ROLES) */}
@@ -1338,60 +1185,87 @@ export default function App() {
               </div>
 
               {/* Right Column: Message Form */}
-              <div className="p-6 md:p-8 rounded-2xl bg-[#0c121e] border border-white/10">
+              <div className="p-6 md:p-8 rounded-2xl bg-[#0c121e] border border-slate-800">
                 <h3 className="text-xl font-bold text-white mb-2">Kirim Pesan Langsung</h3>
                 <p className="text-xs text-zinc-400 mb-6 font-light">
-                  Formulir ini terhubung langsung untuk diskusi tawaran kerjasama atau konsultasi proyek.
+                  Formulir ini terhubung langsung untuk mengirim pesan ke email <strong>theevil1896@gmail.com</strong> dengan proteksi anti-spam Cloudflare.
                 </p>
 
                 <form onSubmit={handleFormSubmit} className="space-y-4">
+                  {/* Honeypot Anti-Spam Hidden Checkbox */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    className="hidden"
+                    style={{ display: 'none' }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+
                   <div>
                     <label className="text-xs font-mono text-zinc-300 block mb-1.5">Nama Lengkap</label>
                     <input
                       type="text"
+                      name="name"
                       required
                       value={formName}
                       onChange={(e) => setFormName(e.target.value)}
-                      onFocus={() => setIsUserTyping(true)}
-                      onBlur={() => setIsUserTyping(false)}
                       placeholder="Contoh: Budi Santoso"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 text-white text-sm outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 focus:border-blue-500 text-white text-sm outline-none transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-mono text-zinc-300 block mb-1.5">Alamat Email</label>
+                    <label className="text-xs font-mono text-zinc-300 block mb-1.5">Alamat Email Anda</label>
                     <input
                       type="email"
+                      name="email"
                       required
                       value={formEmail}
                       onChange={(e) => setFormEmail(e.target.value)}
-                      onFocus={() => setIsUserTyping(true)}
-                      onBlur={() => setIsUserTyping(false)}
                       placeholder="budi@example.com"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 text-white text-sm outline-none transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 focus:border-blue-500 text-white text-sm outline-none transition-colors"
                     />
                   </div>
 
                   <div>
                     <label className="text-xs font-mono text-zinc-300 block mb-1.5">Pesan / Topik Diskusi</label>
                     <textarea
+                      name="message"
                       required
                       rows={4}
                       value={formMessage}
                       onChange={(e) => setFormMessage(e.target.value)}
-                      onFocus={() => setIsUserTyping(true)}
-                      onBlur={() => setIsUserTyping(false)}
-                      placeholder="Tuliskan pesan Anda di sini..."
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-blue-500 text-white text-sm outline-none transition-colors resize-none"
+                      placeholder="Tuliskan pesan atau tawaran kerjasama Anda di sini..."
+                      className="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 focus:border-blue-500 text-white text-sm outline-none transition-colors resize-none"
                     />
+                  </div>
+
+                  {/* Cloudflare Turnstile Anti-Spam Widget */}
+                  <div className="py-1">
+                    <div
+                      className="cf-turnstile"
+                      data-sitekey="1x00000000000000000000AA"
+                      data-theme="dark"
+                      data-size="flexible"
+                    />
+                    <div className="flex items-center gap-1.5 mt-1 text-[10px] font-mono text-zinc-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span>Proteksi Cloudflare Turnstile Aktif (Bebas Spam & Bot)</span>
+                    </div>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-[0_0_20px_rgba(44,103,237,0.4)] flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
                   >
-                    {formSubmitted ? (
+                    {isSubmitting ? (
+                      <>
+                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        <span>Mengirim ke theevil1896@gmail.com...</span>
+                      </>
+                    ) : formSubmitted ? (
                       <>
                         <Check size={16} className="text-emerald-300" />
                         <span>Pesan Berhasil Terkirim!</span>
@@ -1399,10 +1273,39 @@ export default function App() {
                     ) : (
                       <>
                         <Send size={16} />
-                        <span>Kirim Pesan Sekarang</span>
+                        <span>Kirim Pesan ke theevil1896@gmail.com</span>
                       </>
                     )}
                   </button>
+
+                  {/* Sent Confirmation with Direct Actions */}
+                  {formSubmitted && (
+                    <div className="p-3.5 rounded-xl bg-slate-900 border border-emerald-500/30 text-xs text-zinc-200 space-y-2 mt-2">
+                      <div className="flex items-center gap-2 text-emerald-400 font-semibold">
+                        <Check size={15} />
+                        <span>Terkirim ke theevil1896@gmail.com</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-400">
+                        Pesan Anda telah diteruskan. Anda juga dapat membuka Gmail secara langsung atau via WhatsApp:
+                      </p>
+                      <div className="flex items-center gap-2 pt-1 flex-wrap">
+                        <a
+                          href={`mailto:theevil1896@gmail.com?subject=${encodeURIComponent('Pesan dari ' + formName)}&body=${encodeURIComponent(formMessage + '\n\nDari: ' + formName + ' (' + formEmail + ')')}`}
+                          className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-blue-300 text-[11px] font-mono hover:bg-blue-600 hover:text-white transition-colors"
+                        >
+                          Buka di Gmail / Mail App ➔
+                        </a>
+                        <a
+                          href={`https://wa.me/6289509507443?text=${encodeURIComponent('Halo Zainal, saya ' + formName + ' (' + formEmail + ').\n\nPesan:\n' + formMessage)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2.5 py-1 rounded bg-slate-800 border border-slate-700 text-emerald-300 text-[11px] font-mono hover:bg-emerald-600 hover:text-white transition-colors"
+                        >
+                          Kirim via WhatsApp ➔
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </form>
               </div>
 

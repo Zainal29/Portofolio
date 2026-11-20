@@ -1,12 +1,12 @@
-import { useMemo, useEffect, useState } from 'react';
-import { EdgeAura } from 'edge-aura/react';
+import { useEffect, useState } from 'react';
 
 /**
  * CyberEdgeAura
- * Wrapper around takuyajodai/edge-aura optimized for Muhammad Zainal Arief's portfolio:
- * - Slim, subtle ambient glow (toned down band and alpha so it never distracts or lags)
- * - Dynamic theme switching: 'ocean' (cyan/blue) for default, 'aurora' (emerald/cyan) for Hacker Persona
- * - Battery & GPU friendly: throttled quiescent rAF loop (8-10 fps when idle)
+ * Ultra-high-performance, hardware-accelerated ambient cyber aura:
+ * - Pure CSS / SVG GPU-accelerated vignette & edge illumination (Zero WebGL / Canvas overhead)
+ * - Glitch-free, responsive perimeter frame with subtle corner HUD brackets
+ * - Dynamic color shifting: Electric Blue/Sky (default) <-> Cyber Emerald/Cyan (Hacker persona)
+ * - Reactive pulse wave on typing or contact form interactions
  */
 export default function CyberEdgeAura({
   isHacker = false,
@@ -14,77 +14,63 @@ export default function CyberEdgeAura({
   pulseTrigger = 0,
   enabled = true
 }) {
-  const [isMobile, setIsMobile] = useState(false);
+  const [pulsing, setPulsing] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile, { passive: true });
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // Stabilize options to avoid unnecessary engine reconfigurations
-  const auraOptions = useMemo(() => {
-    return {
-      geometry: {
-        inset: 2,
-        cornerRadius: isMobile ? 8 : 14,
-        band: isMobile ? 16 : 24, // Slim, elegant neon rim (previously 42/68)
-        coreSigmaBase: isMobile ? 0.75 : 0.95,
-        coreSigmaVar: 0.25,
-        innerSoftBase: 0.7,
-        innerSoftVar: 0.25,
-        innerSigmaMax: isMobile ? 6 : 9,
-        cornerFill: false
-      },
-      palette: {
-        background: 'dark',
-        ringAlpha: isHacker ? 0.45 : 0.30, // Subtle luminescence (previously 0.78-0.95)
-        pastel: isHacker ? 0.25 : 0.36,
-        darkAlphaGamma: 0.7,
-        darkChroma: 1.1,
-        coreWhiten: 0.12,
-        normalize: true,
-        interpolation: 'srgb',
-        blendMode: 'source-over'
-      },
-      motion: {
-        rotateIdleS: isHacker ? 10 : 16,
-        rotateTypingS: 4.5,
-        decay: 0.8,
-        hueDriftDeg: 6,
-        hueDriftPeriodS: 16
-      },
-      input: {
-        tapEnergy: 0.35,
-        keyEnergy: 0.4,
-        savedPulseEnergy: 0.35
-      }
-    };
-  }, [isMobile, isHacker]);
+    if (pulseTrigger > 0) {
+      const pulseOn = setTimeout(() => setPulsing(true), 0);
+      const pulseOff = setTimeout(() => setPulsing(false), 900);
+      return () => {
+        clearTimeout(pulseOn);
+        clearTimeout(pulseOff);
+      };
+    }
+  }, [pulseTrigger]);
 
   if (!enabled) return null;
 
   return (
     <div
-      className="cyber-edge-aura-wrapper pointer-events-none fixed inset-0 z-40 overflow-hidden"
+      className={`cyber-edge-aura-container fixed inset-0 pointer-events-none z-30 overflow-hidden transition-all duration-700 ${
+        isHacker ? 'theme-hacker' : 'theme-default'
+      } ${isTyping ? 'is-typing' : ''} ${pulsing ? 'is-pulsing' : ''}`}
       aria-hidden="true"
     >
-      <EdgeAura
-        palette={isHacker ? 'aurora' : 'ocean'}
-        state={isTyping ? 'typing' : 'idle'}
-        savedAt={pulseTrigger}
-        options={auraOptions}
-        quiescentFps={isMobile ? 8 : 10} // 8-10 fps idle to eliminate GPU lag
-        style={{
-          position: 'fixed',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 40
-        }}
-      />
+      {/* Precision Solid Cyber Hairline Inner Rim Frame (No Heavy Gradients) */}
+      <div className="aura-frame-hairline" />
+
+      {/* 3. Corner HUD Brackets & Metadata */}
+      {/* Top Left */}
+      <div className="aura-corner aura-corner-tl">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" className="aura-bracket-svg">
+          <path d="M1 21V1H21" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+        <span className="aura-corner-tag">MZA.DEV // SYS-01</span>
+      </div>
+
+      {/* Top Right */}
+      <div className="aura-corner aura-corner-tr">
+        <span className="aura-corner-tag">PKL // READY</span>
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" className="aura-bracket-svg">
+          <path d="M21 21V1H1" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+      </div>
+
+      {/* Bottom Left */}
+      <div className="aura-corner aura-corner-bl">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" className="aura-bracket-svg">
+          <path d="M1 1V21H21" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+        <span className="aura-corner-tag">SMKN 1 BANGSRI</span>
+      </div>
+
+      {/* Bottom Right */}
+      <div className="aura-corner aura-corner-br">
+        <span className="aura-corner-tag">STATUS: 200 OK</span>
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" className="aura-bracket-svg">
+          <path d="M21 1V21H1" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+      </div>
     </div>
   );
 }

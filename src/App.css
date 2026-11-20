@@ -246,7 +246,7 @@
   color: #e2e8f0;
   line-height: 1.6;
   min-height: 270px;
-  background: radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.04), transparent 50%), #070c18;
+  background: #070c18;
 }
 
 .terminal-line {
@@ -433,16 +433,17 @@
   gap: 12px;
   padding: 12px 14px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(18, 27, 44, 0.85), rgba(12, 19, 32, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  transition: all 0.25s ease;
+  background: #0c121e;
+  border: 1px solid #1e293b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
 }
 
 .skill-item-card:hover {
-  border-color: rgba(56, 189, 248, 0.45);
+  border-color: #3b82f6;
+  background: #111a2e;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .skill-icon-box {
@@ -450,11 +451,11 @@
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #172238;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #1e293b;
 }
 
 .skill-info {
@@ -483,8 +484,8 @@
   padding: 4rem 2rem;
   text-align: center;
   border-radius: 20px;
-  background: radial-gradient(circle at 50% 30%, rgba(44, 103, 237, 0.12), transparent 70%), linear-gradient(135deg, rgba(18, 27, 44, 0.8), rgba(12, 19, 32, 0.9));
-  border: 1px dashed rgba(255, 255, 255, 0.18);
+  background: #0c121e;
+  border: 1px dashed #334155;
   max-width: 680px;
   margin: 0 auto;
   display: flex;
@@ -844,13 +845,7 @@
 }
 
 .about-portrait-glow {
-  filter: blur(55px) !important;
-  border-radius: 50% !important;
-  position: absolute !important;
-  inset: -5% !important;
-  pointer-events: none !important;
-  z-index: 0 !important;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(44, 103, 237, 0.25) 50%, transparent 75%) !important;
+  display: none !important;
 }
 
 
@@ -887,9 +882,9 @@
   max-width: 480px !important;
   margin: 0 auto !important;
   z-index: 99999 !important;
-  background: linear-gradient(165deg, rgba(11, 18, 38, 0.98), rgba(6, 10, 22, 0.98)) !important;
-  border: 1px solid rgba(56, 189, 248, 0.3) !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(56, 189, 248, 0.15) !important;
+  background: #0c121e !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85) !important;
   border-radius: 20px !important;
   padding: 16px 18px !important;
   display: flex !important;
@@ -972,17 +967,17 @@
   width: 100% !important;
   padding: 13px !important;
   border-radius: 12px !important;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  background: #2563eb !important;
   color: #ffffff !important;
   font-weight: 700 !important;
   font-size: 14px !important;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4) !important;
+  box-shadow: none !important;
   text-decoration: none !important;
   transition: all 0.2s ease !important;
 }
 
 .navbar-mobile-cta:hover {
-  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  background: #1d4ed8 !important;
 }
 
 /* Hide legacy mobile menu */
@@ -994,28 +989,29 @@
    PORTFOLIO TAB BAR - DESKTOP & GENERAL STYLES
    ========================================================================= */
 .portfolio-tab-bar {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 6px !important;
-  width: min(540px, calc(100% - 24px)) !important;
-  margin: 0 auto 2.5rem !important;
-  padding: 6px !important;
-  background: rgba(9, 14, 28, 0.85) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 16px !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
-}
-
-.portfolio-tab-btn {
-  display: flex !important;
+  display: inline-flex !important;
   flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 6px !important;
-  padding: 10px 14px !important;
-  border-radius: 12px !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin: 0 auto 2.5rem !important;
+  padding: 6px !important;
+  background: #0c121e !important;
+  border: 1px solid #1e293b !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.portfolio-tab-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 8px 18px !important;
+  border-radius: 10px !important;
   font-size: 13px !important;
   font-weight: 600 !important;
   color: #94a3b8 !important;
@@ -1023,25 +1019,26 @@
   border: 1px solid transparent !important;
   cursor: pointer !important;
   white-space: nowrap !important;
-  transition: all 0.2s ease !important;
-  min-height: 42px !important;
+  transition: all 0.15s ease !important;
+  flex: 0 0 auto !important;
+  min-height: 40px !important;
 }
 
 .portfolio-tab-btn:hover {
   color: #ffffff !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: #172033 !important;
 }
 
 .portfolio-tab-btn.is-active {
   color: #ffffff !important;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-  border-color: rgba(96, 165, 250, 0.4) !important;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  background: #2563eb !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35) !important;
 }
 
 .portfolio-tab-icon {
-  width: 16px !important;
-  height: 16px !important;
+  width: 15px !important;
+  height: 15px !important;
   flex-shrink: 0 !important;
 }
 
@@ -1056,19 +1053,20 @@
   align-items: center !important;
   justify-content: center !important;
   padding: 2px 7px !important;
-  border-radius: 999px !important;
-  font-size: 11px !important;
+  border-radius: 6px !important;
+  font-size: 10px !important;
   font-family: monospace !important;
   font-weight: 700 !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: inherit !important;
+  background: #1e293b !important;
+  color: #94a3b8 !important;
+  border: 1px solid #334155 !important;
   line-height: 1 !important;
-  margin-left: 2px !important;
 }
 
 .portfolio-tab-btn.is-active .portfolio-tab-badge {
-  background: rgba(255, 255, 255, 0.25) !important;
+  background: #1d4ed8 !important;
   color: #ffffff !important;
+  border-color: #60a5fa !important;
 }
 
 /* =========================================================================
@@ -1345,24 +1343,25 @@ html, body, #root {
   }
 
   .portfolio-tab-bar {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    width: calc(100% - 16px) !important;
-    max-width: 440px !important;
-    gap: 4px !important;
-    padding: 4px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 6px !important;
+    padding: 6px !important;
     margin: 0 auto 2rem !important;
   }
 
   .portfolio-tab-btn {
-    display: flex !important;
-    flex-direction: row !important;
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
     align-items: center !important;
     justify-content: center !important;
-    padding: 8px 6px !important;
-    font-size: 11.5px !important;
-    gap: 4px !important;
-    min-height: 38px !important;
+    padding: 7px 12px !important;
+    font-size: 12px !important;
+    gap: 6px !important;
+    min-height: 36px !important;
     white-space: nowrap !important;
   }
 
@@ -1542,34 +1541,14 @@ html, body, #root {
    RICH CYBER BACKGROUND TEXTURES & ATMOSPHERIC DEPTH (ANTI-EMPTY)
    ========================================================================= */
 
-/* 1. Deep Atmospheric Aurora Nebula Beams (Rich ambient glow between sections) */
+/* 1. Deep Atmospheric Aurora Nebula Beams (Disabled - No AI Slop) */
 .cyber-bg-nebula-beams {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  background:
-    radial-gradient(circle 750px at 15% 15%, rgba(37, 99, 235, 0.16), transparent 72%),
-    radial-gradient(circle 800px at 85% 38%, rgba(14, 165, 233, 0.13), transparent 74%),
-    radial-gradient(circle 680px at 18% 65%, rgba(16, 185, 129, 0.10), transparent 75%),
-    radial-gradient(circle 720px at 78% 85%, rgba(99, 102, 241, 0.14), transparent 72%);
+  display: none !important;
 }
 
-/* 2. Global Tech Blueprint Grid & Dot Matrix Pattern */
+/* 2. Global Tech Blueprint Grid & Dot Matrix Pattern (Disabled - Handled by solid-tech-grid-bg) */
 .cyber-bg-texture-grid {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0.65;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.038) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.038) 1px, transparent 1px),
-    radial-gradient(circle 1.5px at 0 0, rgba(56, 189, 248, 0.38) 100%, transparent 0);
-  background-size: 48px 48px, 48px 48px, 96px 96px;
-  background-position: 0 0, 0 0, 0 0;
-  mask-image: radial-gradient(ellipse 95% 85% at 50% 32%, black 45%, transparent 95%);
-  -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 32%, black 45%, transparent 95%);
+  display: none !important;
 }
 
 /* 3. Micro Tactile Noise Texture (Prevents flat empty blacks) */
@@ -1585,208 +1564,82 @@ html, body, #root {
 }
 
 /* =========================================================================
-   SCROLLCRAFT-INSPIRED CINEMATIC SCROLL-SCRUBBED INTRO
+   RICH TACTILE TECH BLUEPRINT TEXTURE (ANTI-EMPTY, ZERO GPU OVERHEAD)
    ========================================================================= */
-.scrollcraft-intro-track {
-  height: 100vh;
-  min-height: 640px;
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background: #050811;
-}
 
-.scrollcraft-intro-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: clamp(24px, 4vw, 44px) clamp(20px, 4vw, 40px);
-  z-index: 10;
-  user-select: none;
-}
-
-/* Navbar intro hide / show transition */
-.navbar-root {
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease !important;
-}
-
-.navbar-hidden-on-intro {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  transform: translateY(-28px) !important;
-}
-
-.navbar-visible {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  transform: translateY(0) !important;
-}
-
-.scrollcraft-canvas-aperture {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.scrollcraft-grid-overlay {
-  position: absolute;
+/* Dense, tactile engineering technical blueprint grid */
+.solid-tech-grid-bg {
+  position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
+  background-color: #070a12;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%);
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
-.scrollcraft-header {
-  width: 100%;
-  max-width: 1100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 3;
+/* Page background: Solid Obsidian Void */
+.home-page-container {
+  background: #070a12 !important;
+  min-height: 100vh;
 }
 
-.scrollcraft-brand-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.home-page-container:before {
+  display: none !important;
 }
 
-.scrollcraft-status-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+/* Solid Surface Carbon Cards */
+.portfolio-project-card,
+.experience-card,
+.experience-stat-card,
+.spotify-card {
+  background: #0c121e !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
-.scrollcraft-center-content {
-  text-align: center;
-  max-width: 960px;
-  position: relative;
-  z-index: 3;
-  padding: 24px 0;
-  will-change: transform, opacity;
+.spotify-card:before {
+  display: none !important;
 }
 
-.scrollcraft-main-title {
-  font-size: clamp(2.4rem, 5.2vw, 4.2rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: #f8fafc;
-  line-height: 1.08;
-  margin: 0 0 16px;
+.portfolio-project-card:hover {
+  border-color: #3b82f6 !important;
+  background: #0e1626 !important;
+  transform: translateY(-3px) !important;
 }
 
-.scrollcraft-sub-role {
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  color: #94a3b8;
-  font-weight: 400;
-  max-width: 580px;
-  margin: 0 auto 28px;
-  line-height: 1.6;
+/* Solid Buttons & Controls */
+.hero-btn-primary,
+.about-action-primary,
+.portfolio-tab-btn.is-active {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
 }
 
-.scrollcraft-tech-pills {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
+.hero-btn-primary:hover,
+.about-action-primary:hover {
+  background: #1d4ed8 !important;
 }
 
-.scrollcraft-tech-tag {
-  padding: 6px 14px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  font-size: 12px;
-  font-family: monospace;
-  color: #cbd5e1;
+.hero-btn-secondary,
+.about-action-secondary {
+  background: #0c121e !important;
+  border: 1px solid #1e293b !important;
+  color: #f1f5f9 !important;
+  box-shadow: none !important;
 }
 
-.scrollcraft-bottom-bar {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  z-index: 3;
+.hero-btn-secondary:hover,
+.about-action-secondary:hover {
+  background: #1e293b !important;
+  border-color: #3b82f6 !important;
 }
 
-.scrollcraft-scroll-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 24px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  cursor: pointer;
-  transition: all 0.25s ease;
-  color: #f8fafc;
-}
-
-.scrollcraft-scroll-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(59, 130, 246, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
-
-.scrollcraft-mouse-icon {
-  width: 22px;
-  height: 32px;
-  border-radius: 12px;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  display: flex;
-  justify-content: center;
-  padding-top: 5px;
-  flex-shrink: 0;
-}
-
-.scrollcraft-mouse-wheel {
-  width: 3px;
-  height: 6px;
-  border-radius: 99px;
-  background: #3b82f6;
-  animation: scrollcraftWheelSlide 1.6s ease-in-out infinite;
-}
-
-@keyframes scrollcraftWheelSlide {
-  0% { transform: translateY(0); opacity: 1; }
-  60% { transform: translateY(8px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 0; }
-}
-
-@media (max-width: 767px) {
-  .scrollcraft-intro-track {
-    height: 180vh;
-  }
-}
-
-/* =========================================================================
-   CLEAN MINIMALIST TYPOGRAPHY (ANTI-AI-SLOP GRADIENT OVERRIDES)
-   ========================================================================= */
-
-/* Replace rainbow AI text gradients with crisp, solid electric blue */
+/* Solid Typography (No Rainbow / Slop Gradients) */
+.hero-h1-accent,
 .hero-h1-gradient {
   color: #3b82f6 !important;
   background: none !important;
@@ -1818,6 +1671,104 @@ html, body, #root {
 .hero-typewriter-text {
   color: #93c5fd !important;
   font-weight: 500 !important;
+}
+
+/* Portfolio Tab Bar */
+.portfolio-tab-bar {
+  background: #090e17 !important;
+  border: 1px solid #1e293b !important;
+}
+
+/* Terminal Window Solid Surface */
+.terminal-window {
+  background: #090e17 !important;
+  border: 1px solid #1e293b !important;
+}
+
+/* Hero Section Anchoring */
+.hero-root-section {
+  padding-top: 100px !important;
+  min-height: calc(100vh - 40px) !important;
+}
+
+@media (max-width: 767px) {
+  .hero-root-section {
+    padding-top: 88px !important;
+    padding-bottom: 36px !important;
+    min-height: auto !important;
+  }
+}
+
+/* =========================================================================
+   CLEAN BESPOKE ENGINEERING OVERRIDES (ZERO GRADIENTS, NO AI SLOP)
+   ========================================================================= */
+.grad-vi,
+.hero-h1-accent,
+.hero-h1-gradient,
+.about-title-greeting {
+  color: #3b82f6 !important;
+  background: none !important;
+  -webkit-text-fill-color: #3b82f6 !important;
+  -webkit-background-clip: unset !important;
+}
+
+.gsap-ambient,
+.gsap-ambient-orb,
+.cyber-bg-nebula-beams,
+.cyber-bg-texture-noise,
+.about-portrait-glow {
+  display: none !important;
+}
+
+.home-page-container,
+html,
+body,
+#root {
+  background: #070a12 !important;
+}
+
+.home-page-container:before,
+.home-page-container:after {
+  display: none !important;
+}
+
+.contact-panel,
+.contact-comments-panel,
+.portfolio-project-card,
+.experience-card,
+.experience-stat-card,
+.skill-item-card,
+.terminal-window,
+.portfolio-empty-state {
+  background: #0c121e !important;
+  border-color: #1e293b !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+.hero-btn-primary,
+.about-action-primary,
+.navbar-mobile-cta {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.hero-btn-primary:hover,
+.about-action-primary:hover,
+.navbar-mobile-cta:hover {
+  background: #1d4ed8 !important;
+}
+
+.portfolio-tab-btn.is-active {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35) !important;
+}
+
+.portfolio-tab-bar {
+  background: #0c121e !important;
+  border: 1px solid #1e293b !important;
 }
 
 
