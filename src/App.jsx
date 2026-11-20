@@ -461,21 +461,21 @@ export default function App() {
       <div className="solid-tech-grid-bg" aria-hidden="true" />
 
       {/* Floating Modern Pill Navbar */}
-      <header className="navbar-root fixed top-3 md:top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
-        <div className={`pointer-events-auto flex items-center justify-between gap-4 md:gap-8 px-4 md:px-5 py-2.5 rounded-full border transition-all duration-300 max-w-4xl w-full ${
+      <header className="navbar-root fixed top-3 md:top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none">
+        <div className={`pointer-events-auto flex items-center justify-between gap-3 md:gap-8 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full border transition-all duration-300 max-w-4xl w-full ${
           navScrolled
             ? 'bg-[#0c121e]/95 border-slate-700/80 shadow-2xl backdrop-blur-md'
-            : 'bg-[#0c121e]/85 border-slate-800 shadow-xl backdrop-blur-sm'
+            : 'bg-[#0c121e]/90 border-slate-800 shadow-xl backdrop-blur-sm'
         }`}>
 
           {/* Simple Logo */}
           <a
             href="#hero"
             onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}
-            className="flex items-center"
+            className="flex items-center shrink-0"
             aria-label="MZA.dev - Muhammad Zainal Arief"
           >
-            <MzaLogo size={30} showText={true} />
+            <MzaLogo size={28} showText={true} />
           </a>
 
           {/* Desktop Navigation Links */}
@@ -501,7 +501,7 @@ export default function App() {
           </nav>
 
           {/* Right Action & Mobile Toggle */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); scrollTo('#contact'); }}
@@ -513,7 +513,7 @@ export default function App() {
 
             <button
               type="button"
-              className="md:hidden p-1 text-zinc-300 hover:text-white rounded-lg"
+              className="md:hidden p-1.5 text-zinc-300 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
             >
