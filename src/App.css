@@ -1771,5 +1771,609 @@ body,
   border: 1px solid #1e293b !important;
 }
 
+/* =========================================================================
+   COMPREHENSIVE PROFESSIONAL MOBILE RESPONSIVE ENGINE (ZERO OVERFLOW, CRISP LAYOUT)
+   ========================================================================= */
+
+/* Base Action Styles */
+.about-action {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 22px !important;
+  border-radius: 14px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease !important;
+  cursor: pointer !important;
+  box-sizing: border-box !important;
+}
+
+/* 1. Global Viewport & Boundary Enforcement */
+html,
+body,
+#root,
+.home-page-container {
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.home-ui-scale {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  zoom: 1 !important;
+  position: relative !important;
+}
+
+/* 2. Floating Navbar Mobile Optimization */
+@media (max-width: 767px) {
+  .navbar-root {
+    padding: 0 12px !important;
+    top: 8px !important;
+  }
+
+  .navbar-root > div {
+    padding: 8px 12px !important;
+    gap: 8px !important;
+  }
+}
+
+/* 3. Hero Section Mobile Optimization */
+@media (max-width: 767px) {
+  .hero-root-section {
+    padding: 95px 14px 32px !important;
+    min-height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .hero-container-inner {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.75rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-text-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+  }
+
+  .hero-status-pill {
+    margin: 0 auto 1rem !important;
+    padding: 4px 10px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-status-label {
+    font-size: 9.5px !important;
+    letter-spacing: 0.04em !important;
+    white-space: normal !important;
+  }
+
+  .hero-heading-group {
+    width: 100% !important;
+    align-items: center !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .hero-heading-group h1,
+  .hero-h1-white,
+  .hero-h1-accent,
+  .hero-h1-gradient {
+    font-size: clamp(2rem, 8.5vw, 3.2rem) !important;
+    line-height: 1.08 !important;
+    text-align: center !important;
+    word-break: break-word !important;
+  }
+
+  .hero-typewriter-row {
+    justify-content: center !important;
+    font-size: 1rem !important;
+    min-height: 24px !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-description-copy {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    margin: 0 auto 1.25rem !important;
+    padding: 0 4px !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-action-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto 1.5rem !important;
+    gap: 8px !important;
+  }
+
+  .hero-action-row a,
+  .hero-btn-primary,
+  .hero-btn-secondary {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+    padding: 11px 18px !important;
+    font-size: 0.88rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .hero-find-me-wrap {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-top: 0.5rem !important;
+  }
+
+  .hero-social-buttons {
+    gap: 8px !important;
+  }
+
+  .hero-visual-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 0.5rem !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+  }
+
+  .dev-showcase-stage {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* 4. About Section Mobile Optimization */
+@media (max-width: 767px) {
+  .about-root-section {
+    padding: 48px 14px 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .about-root-section > .section-display-title {
+    font-size: clamp(1.8rem, 7vw, 2.6rem) !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .about-container-inner {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 2rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .about-intro {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .about-title {
+    font-size: clamp(1.6rem, 6.5vw, 2.2rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+  }
+
+  .about-intro .flex {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+    gap: 8px !important;
+  }
+
+  .about-action {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    padding: 11px 18px !important;
+    border-radius: 12px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-decoration: none !important;
+  }
+
+  .about-portrait-stage {
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+  }
+
+  .about-portrait {
+    width: 100% !important;
+    max-width: 280px !important;
+    height: 360px !important;
+    aspect-ratio: 3 / 4 !important;
+    border-radius: 18px !important;
+  }
+
+  .about-bio {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0.75rem !important;
+    text-align: left !important;
+    width: 100% !important;
+  }
+
+  .about-bio > div {
+    padding: 14px 16px !important;
+    border-radius: 14px !important;
+    background: #0c121e !important;
+    border: 1px solid #1e293b !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* 5. Experience & Education Mobile Optimization */
+@media (max-width: 767px) {
+  .experience-section {
+    padding: 44px 14px 36px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .experience-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .experience-columns {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
+  }
+
+  .experience-group h2 {
+    font-size: 1.15rem !important;
+    margin-bottom: 0.75rem !important;
+    text-align: center !important;
+  }
+
+  .experience-card {
+    padding: 14px !important;
+    border-radius: 14px !important;
+    gap: 12px !important;
+  }
+
+  .experience-stat-icon {
+    width: 40px !important;
+    height: 40px !important;
+    shrink: 0 !important;
+  }
+
+  .experience-stats {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0.65rem !important;
+    margin-top: 1.25rem !important;
+  }
+
+  .experience-stat-card {
+    padding: 14px 16px !important;
+    border-radius: 14px !important;
+  }
+}
+
+/* 6. Terminal Window Mobile Optimization */
+@media (max-width: 767px) {
+  .terminal-section {
+    padding: 16px 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .terminal-window {
+    border-radius: 12px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .terminal-header {
+    padding: 8px 12px !important;
+    gap: 6px !important;
+  }
+
+  .terminal-title {
+    font-size: 11px !important;
+    max-width: 180px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  .terminal-tabs-bar {
+    padding: 0 6px !important;
+    gap: 2px !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+  }
+
+  .terminal-tab-btn {
+    padding: 6px 8px !important;
+    font-size: 10px !important;
+    white-space: nowrap !important;
+  }
+
+  .terminal-body {
+    padding: 12px 10px !important;
+    font-size: 11px !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+/* 7. Portfolio Section & Tabs Mobile Optimization */
+@media (max-width: 767px) {
+  .portfolio-root-section {
+    padding: 48px 14px 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .portfolio-container-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .portfolio-section-title {
+    font-size: clamp(1.6rem, 6.5vw, 2.2rem) !important;
+    line-height: 1.15 !important;
+  }
+
+  .portfolio-section-subtitle {
+    font-size: 0.85rem !important;
+    padding: 0 4px !important;
+  }
+
+  .portfolio-tab-bar {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 4px !important;
+    padding: 4px !important;
+    border-radius: 14px !important;
+    margin: 0 auto 1.5rem !important;
+    box-sizing: border-box !important;
+  }
+
+  .portfolio-tab-btn {
+    width: 100% !important;
+    padding: 8px 4px !important;
+    font-size: 11px !important;
+    min-height: 38px !important;
+    border-radius: 10px !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+  }
+
+  .portfolio-tab-icon {
+    display: none !important;
+  }
+
+  .portfolio-tab-badge {
+    display: none !important;
+  }
+
+  .portfolio-cards-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+  }
+
+  .portfolio-project-card {
+    padding: 12px !important;
+    border-radius: 14px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .portfolio-card-thumbnail {
+    aspect-ratio: 16 / 9.5 !important;
+    border-radius: 10px !important;
+  }
+
+  .portfolio-card-body {
+    padding: 14px 2px 2px !important;
+  }
+
+  .portfolio-card-title {
+    font-size: 1.2rem !important;
+  }
+
+  .portfolio-card-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .stack-flow-container {
+    padding: 8px 10px !important;
+    margin: 8px 0 10px !important;
+  }
+
+  .stack-flow-badge {
+    font-size: 9.5px !important;
+    padding: 2px 5px !important;
+  }
+
+  .portfolio-details-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    font-size: 0.88rem !important;
+    min-height: 44px !important;
+  }
+
+  .skills-grid-wrapper {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .skill-item-card {
+    padding: 8px 8px !important;
+    gap: 6px !important;
+    border-radius: 10px !important;
+  }
+
+  .skill-icon-box {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .skill-title {
+    font-size: 11px !important;
+  }
+
+  .skill-level-text {
+    font-size: 9px !important;
+  }
+}
+
+/* 8. Contact Section Mobile Optimization */
+@media (max-width: 767px) {
+  .contact-root-section {
+    padding: 48px 14px 40px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .contact-container-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  .contact-section-title {
+    font-size: clamp(1.6rem, 6.5vw, 2.2rem) !important;
+  }
+
+  .contact-main-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+  }
+
+  .contact-main-grid > div {
+    padding: 16px 14px !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  input,
+  textarea {
+    font-size: 16px !important; /* Prevents auto-zoom in mobile Safari and Chrome */
+  }
+}
+
+/* 9. Modal Detail Popup Mobile Optimization */
+@media (max-width: 767px) {
+  .portfolio-modal-backdrop {
+    padding: 12px 8px 36px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+  }
+
+  .portfolio-modal-content {
+    border-radius: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .portfolio-modal-header-banner {
+    height: 180px !important;
+    max-height: 180px !important;
+    border-radius: 15px 15px 0 0 !important;
+  }
+
+  .portfolio-modal-close-btn {
+    top: 8px !important;
+    right: 8px !important;
+    width: 34px !important;
+    height: 34px !important;
+    background: rgba(12, 18, 30, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  }
+
+  .portfolio-modal-body {
+    padding: 1rem 0.85rem !important;
+  }
+
+  .portfolio-modal-title {
+    font-size: 1.25rem !important;
+  }
+
+  .portfolio-modal-desc {
+    font-size: 0.85rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .portfolio-modal-actions {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .portfolio-modal-actions a {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+  }
+}
+
+/* 10. Extra Small Screens (iPhone SE, Galaxy Fold <= 360px) */
+@media (max-width: 360px) {
+  .hero-h1-white,
+  .hero-h1-accent,
+  .hero-h1-gradient {
+    font-size: 1.85rem !important;
+  }
+
+  .hero-status-label {
+    font-size: 8.5px !important;
+  }
+
+  .skills-grid-wrapper {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .portfolio-tab-btn {
+    font-size: 9.5px !important;
+    padding: 6px 2px !important;
+  }
+}
+
+
 
 

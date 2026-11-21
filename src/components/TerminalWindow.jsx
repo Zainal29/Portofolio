@@ -47,51 +47,52 @@ Role: Backend Developer (Muhammad Zainal Arief)`;
     <div className="terminal-window-wrapper">
       <div className="terminal-window">
         {/* Title Bar */}
-        <div className="terminal-header">
-          <div className="terminal-dots">
+        <div className="terminal-header flex items-center justify-between px-3 sm:px-4 py-2 sm:py-2.5 gap-2">
+          <div className="terminal-dots flex items-center gap-1.5 shrink-0">
             <span className="terminal-dot dot-red" />
             <span className="terminal-dot dot-yellow" />
             <span className="terminal-dot dot-green" />
           </div>
 
-          <div className="terminal-title">
-            <Terminal size={14} className="text-cyan-400" />
-            <span>zainal@mza-workstation: ~ (bash)</span>
+          <div className="terminal-title flex items-center gap-1.5 min-w-0">
+            <Terminal size={14} className="text-cyan-400 shrink-0" />
+            <span className="truncate text-xs font-mono">zainal@mza-workstation</span>
+            <span className="hidden sm:inline text-xs font-mono">: ~ (bash)</span>
           </div>
 
-          <div className="terminal-actions">
+          <div className="terminal-actions shrink-0">
             <button
               type="button"
               onClick={copyContent}
-              className="terminal-copy-btn"
+              className="terminal-copy-btn text-xs"
               title="Salin isi terminal"
             >
               {copied ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
-              <span>{copied ? 'Tersalin' : 'Copy'}</span>
+              <span className="hidden xs:inline">{copied ? 'Tersalin' : 'Copy'}</span>
             </button>
           </div>
         </div>
 
         {/* Tab Switcher */}
-        <div className="terminal-tabs-bar">
+        <div className="terminal-tabs-bar flex items-center overflow-x-auto no-scrollbar py-1 px-2 gap-1">
           <button
             type="button"
             onClick={() => setActiveTab('status')}
-            className={`terminal-tab-btn ${activeTab === 'status' ? 'is-active' : ''}`}
+            className={`terminal-tab-btn whitespace-nowrap shrink-0 text-xs px-2.5 py-1 rounded-md ${activeTab === 'status' ? 'is-active' : ''}`}
           >
             <span>systemctl_status.sh</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('pipeline')}
-            className={`terminal-tab-btn ${activeTab === 'pipeline' ? 'is-active' : ''}`}
+            className={`terminal-tab-btn whitespace-nowrap shrink-0 text-xs px-2.5 py-1 rounded-md ${activeTab === 'pipeline' ? 'is-active' : ''}`}
           >
             <span>stack_pipeline.sh</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveTab('whoami')}
-            className={`terminal-tab-btn ${activeTab === 'whoami' ? 'is-active' : ''}`}
+            className={`terminal-tab-btn whitespace-nowrap shrink-0 text-xs px-2.5 py-1 rounded-md ${activeTab === 'whoami' ? 'is-active' : ''}`}
           >
             <span>whoami.json</span>
           </button>

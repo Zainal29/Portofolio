@@ -742,11 +742,12 @@ export default function App() {
             <div className="flex flex-col items-center justify-center">
               <div
                 ref={portraitStageRef}
-                className={`about-portrait-stage is-in-view ${isHackerHovered ? 'spider-hovered hacker-active' : ''}`}
+                className={`about-portrait-stage is-in-view cursor-pointer ${isHackerHovered ? 'spider-hovered hacker-active' : ''}`}
                 onMouseEnter={() => setIsHackerHovered(true)}
                 onMouseLeave={() => setIsHackerHovered(false)}
                 onMouseMove={handlePortraitMouseMove}
-                title="Arahkan kursor ke foto untuk beralih kostum Hacker"
+                onClick={() => setIsHackerHovered(!isHackerHovered)}
+                title="Arahkan kursor atau ketuk foto untuk beralih kostum Hacker"
               >
                 <div className="about-portrait-glow" />
 
@@ -767,10 +768,14 @@ export default function App() {
               </div>
 
               {/* Clean non-intrusive caption below portrait (tidak menutupi wajah) */}
-              <div className="mt-3.5 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[11px] font-mono text-emerald-300 pointer-events-none">
+              <button
+                type="button"
+                onClick={() => setIsHackerHovered(!isHackerHovered)}
+                className="mt-3.5 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[11px] font-mono text-emerald-300 hover:bg-emerald-500/20 transition-colors cursor-pointer"
+              >
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>{isHackerHovered ? '⚡ MODE HACKER AKTIF' : 'ARAHKAN KURSOR: MODE HACKER'}</span>
-              </div>
+                <span>{isHackerHovered ? '⚡ MODE HACKER AKTIF' : 'KETUK / HOVER: MODE HACKER'}</span>
+              </button>
             </div>
 
             {/* Right Column: Bio Pillars */}
@@ -1267,27 +1272,29 @@ export default function App() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold text-sm transition-colors flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
-                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>Mengirim ke theevil1896@gmail.com...</span>
+                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin shrink-0" />
+                        <span className="truncate">Mengirim pesan...</span>
                       </>
                     ) : formStatus === 'success' ? (
                       <>
-                        <Check size={16} className="text-emerald-300" />
+                        <Check size={16} className="text-emerald-300 shrink-0" />
                         <span>Pesan Berhasil Terkirim!</span>
                       </>
                     ) : formStatus === 'activation_needed' ? (
                       <>
-                        <Info size={16} className="text-amber-300" />
-                        <span>Konfirmasi Aktivasi Terkirim!</span>
+                        <Info size={16} className="text-amber-300 shrink-0" />
+                        <span>Aktivasi Diperlukan!</span>
                       </>
                     ) : (
                       <>
-                        <Send size={16} />
-                        <span>Kirim Pesan ke theevil1896@gmail.com</span>
+                        <Send size={16} className="shrink-0" />
+                        <span>Kirim Pesan</span>
+                        <span className="hidden sm:inline"> ke theevil1896@gmail.com</span>
+                        <span className="sm:hidden"> ➔</span>
                       </>
                     )}
                   </button>
@@ -1327,13 +1334,13 @@ export default function App() {
                         )}
                       </p>
 
-                      <div className="flex items-center gap-2 pt-1 flex-wrap">
+                      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-1">
                         {/* Direct Gmail Web Compose */}
                         <a
                           href={`https://mail.google.com/mail/?view=cm&fs=1&to=theevil1896@gmail.com&su=${encodeURIComponent('Pesan Portofolio dari ' + (formName || 'Pengunjung'))}&body=${encodeURIComponent((formMessage || '') + '\n\nDari: ' + (formName || '') + ' (' + (formEmail || '') + ')')}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg bg-blue-600/20 border border-blue-500/50 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-mono transition-colors flex items-center gap-1.5"
+                          className="px-3 py-2 rounded-lg bg-blue-600/20 border border-blue-500/50 text-blue-300 hover:bg-blue-600 hover:text-white text-xs font-mono transition-colors flex items-center justify-center gap-1.5"
                         >
                           <Mail size={13} />
                           <span>Buka di Gmail Web ➔</span>
@@ -1344,7 +1351,7 @@ export default function App() {
                           href={`https://wa.me/6289509507443?text=${encodeURIComponent('Halo Zainal, saya ' + (formName || '') + ' (' + (formEmail || '') + ').\n\nPesan:\n' + (formMessage || ''))}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg bg-emerald-600/20 border border-emerald-500/50 text-emerald-300 hover:bg-emerald-600 hover:text-white text-xs font-mono transition-colors flex items-center gap-1.5"
+                          className="px-3 py-2 rounded-lg bg-emerald-600/20 border border-emerald-500/50 text-emerald-300 hover:bg-emerald-600 hover:text-white text-xs font-mono transition-colors flex items-center justify-center gap-1.5"
                         >
                           <Phone size={13} />
                           <span>Kirim via WhatsApp ➔</span>
@@ -1359,7 +1366,7 @@ export default function App() {
                             setFormEmail('');
                             setFormMessage('');
                           }}
-                          className="px-2.5 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-zinc-400 hover:text-white text-xs font-mono transition-colors"
+                          className="px-2.5 py-2 rounded-lg bg-slate-800 border border-slate-700 text-zinc-400 hover:text-white text-xs font-mono transition-colors"
                         >
                           Tulis Ulang
                         </button>
